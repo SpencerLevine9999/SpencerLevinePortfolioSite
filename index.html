@@ -39,11 +39,13 @@ section{display:none;}
 section.active{display:block;}
 
 /* HOME */
-.hero{min-height:calc(100vh - var(--nav-h));display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:60px 40px;gap:60px;max-width:1100px;margin:0 auto;}
-.hero-photo-wrap{width:280px;height:280px;border-radius:50%;overflow:hidden;margin:0 auto 32px;border:3px solid var(--border);}
-.hero-photo-wrap img{width:100%;height:100%;object-fit:cover;}
+#home{background:url('Images/BACKGROUNDFRONTPAGE.png') center center/cover no-repeat;min-height:calc(100vh - var(--nav-h));}
+.hero{min-height:calc(100vh - var(--nav-h));display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:60px 40px;gap:60px;max-width:1100px;margin:0 auto;background:rgba(245,244,241,0.82);backdrop-filter:blur(2px);}
+.hero-photo-wrap{width:280px;height:280px;border-radius:50%;overflow:hidden;margin:0 auto 32px;border:3px solid var(--border);position:relative;cursor:move;user-select:none;}
+.hero-photo-wrap img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center top;}
 .photo-placeholder{width:100%;height:100%;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;text-align:center;padding:16px;flex-direction:column;gap:6px;}
 .ph-var{font-family:monospace;background:#ccc;padding:2px 6px;border-radius:3px;font-size:10px;}
+.crop-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:-20px;margin-bottom:20px;}
 .hero-bio{font-size:15px;line-height:1.7;color:var(--muted);text-align:center;max-width:380px;margin:0 auto;}
 .hero-right{display:flex;flex-direction:column;gap:32px;}
 .eyebrow{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
@@ -117,6 +119,7 @@ section.active{display:block;}
 
 /* ABOUT */
 .about-wrap{max-width:760px;margin:0 auto;padding:48px 40px 60px;}
+.about-photo{width:100%;height:380px;object-fit:cover;object-position:center 20%;border-radius:4px;margin-bottom:36px;display:block;}
 .about-photo-ph{width:100%;height:340px;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;border-radius:4px;margin-bottom:36px;flex-direction:column;gap:8px;}
 .about-title{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;margin-bottom:20px;}
 .about-body p{font-size:15px;line-height:1.8;color:#333;margin-bottom:18px;}
@@ -146,12 +149,14 @@ section.active{display:block;}
 <section id="home" class="active">
   <div class="hero">
     <div class="hero-left">
-      <div class="hero-photo-wrap">
-        <div class="photo-placeholder">
+      <div class="hero-photo-wrap" id="hero-photo-wrap">
+        <img id="hero-photo" src="" alt="Spencer Levine" style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div class="photo-placeholder" id="hero-photo-ph">
           <span>Your headshot</span>
-          <span class="ph-var">[YOUR_PHOTO.jpg]</span>
+          <span class="ph-var">IMAGES.HERO_PHOTO</span>
         </div>
       </div>
+      <p class="crop-hint" id="crop-hint" style="display:none;">Drag photo to reposition</p>
       <p class="hero-bio">Mechanical engineering student at Tufts University with a passion for robotics and CAD design. Experienced in translating CAD designs into functional prototypes using 3D-printing, and hands-on work with mechanical and electrical components.</p>
     </div>
     <div class="hero-right">
@@ -180,48 +185,7 @@ section.active{display:block;}
     <h2>Engineering Portfolio</h2>
     <p>A collection of engineering projects. I mainly specialize in robotics design, CAD, and 3D-printing.</p>
   </div>
-  <div class="portfolio-grid">
-    <div class="project-card" onclick="showProject(0)">
-      <div class="project-thumb-ph"><span>Robotic Gripper</span><span class="ph-var">[GRIPPER_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>Robotic gripper for 6-axis robot</h3><div class="proj-meta">Gripper Design · Jan 2025</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(1)">
-      <div class="project-thumb-ph"><span>Swerve Drive Robot</span><span class="ph-var">[SWERVE_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>3D Printed Swerve Drive Robot</h3><div class="proj-meta">Swerve Drive · Feb–Apr 2025</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(2)">
-      <div class="project-thumb-ph"><span>Robotic Arm</span><span class="ph-var">[ARM_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>3D-Printed Robotic Arm</h3><div class="proj-meta">Robotic Arm · Jul–Aug 2025</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(3)">
-      <div class="project-thumb-ph"><span>FTC Robot</span><span class="ph-var">[FTC_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>FIRST Tech Challenge — John Jay Robotics</h3><div class="proj-meta">FTC Robot · Sep 2023–Mar 2024</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(4)">
-      <div class="project-thumb-ph"><span>Stock Ranker</span><span class="ph-var">[STOCK_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>ML Stock Ranking Program</h3><div class="proj-meta">Machine Learning · Jan 2026</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(5)">
-      <div class="project-thumb-ph"><span>Housing Predictor</span><span class="ph-var">[HOUSING_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>ML Housing Prices Predictor</h3><div class="proj-meta">Machine Learning · Jan 2026</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(6)">
-      <div class="project-thumb-ph"><span>Hammer Game CAD</span><span class="ph-var">[HAMMER_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>CAD Hammer Game</h3><div class="proj-meta">CAD Design · Nov 2025</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(7)">
-      <div class="project-thumb-ph"><span>Dog Treat Dispenser</span><span class="ph-var">[DOG_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>Dog Treat Dispenser</h3><div class="proj-meta">Engineering Design · Apr–May 2026</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(8)">
-      <div class="project-thumb-ph"><span>Fortnite Animation</span><span class="ph-var">[ANIM_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>Fortnite Animation in 3ds Max</h3><div class="proj-meta">CAD Animation · Dec 2025</div></div>
-    </div>
-    <div class="project-card" onclick="showProject(9)">
-      <div class="project-thumb-ph"><span>Gumball Machine</span><span class="ph-var">[GUMBALL_THUMB.jpg]</span></div>
-      <div class="project-label"><h3>Gumball Machine</h3><div class="proj-meta">Manufacturing · Dec 2025</div></div>
-    </div>
-  </div>
+  <div class="portfolio-grid" id="portfolio-grid"></div>
 </section>
 
 <!-- PROJECT DETAIL -->
@@ -251,7 +215,10 @@ section.active{display:block;}
 <!-- RESUME -->
 <section id="resume">
   <div class="resume-wrap">
-    <a class="resume-dl" href="Spencer_Levine_Resume.pdf" download>↓ Download PDF Resume</a>
+    <a class="resume-dl" href="Images/Spencer Levine Resume Eng (digital) 2 pages (16).pdf" download>↓ Download PDF Resume</a>
+    <div style="width:100%;margin-bottom:36px;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+      <iframe src="Images/Spencer Levine Resume Eng (digital) 2 pages (16).pdf" width="100%" height="900px" style="display:block;border:none;"></iframe>
+    </div>
 
     <div class="resume-section">
       <div class="resume-section-title">Education</div>
@@ -377,16 +344,13 @@ section.active{display:block;}
 <!-- ABOUT -->
 <section id="about">
   <div class="about-wrap">
-    <div class="about-photo-ph">
-      <span>Hard hat workshop photo</span>
-      <span class="ph-var">[ABOUT_PHOTO.jpg]</span>
-    </div>
+  <img class="about-photo" src="Images/ABOUTSECTION.JPG" alt="Spencer Levine">
     <h2 class="about-title">My passion for my work</h2>
     <div class="about-body">
-      <p>In my junior year of high school, I did something that would change my life: I took a robotics class. For the first time in school, I was genuinely struggling, and this struggle sparked something in me that caused me to work harder and more effectively than I ever had before. I would spend hours during and after school working on my team's robot, and when the janitors kicked me out, I would bring the robot home and continue there.</p>
-      <p>I'm the type of person who is determined to push until I succeed. So every failure and setback would only drive me forward until I wasn't looking at a broken robot — I was looking at a completed project. At Tufts, I have continued this passion, starting with personal projects at first, and now doing research in the Nemitz robotics group, and my obsession hasn't wavered.</p>
-      <p>After I graduate from Tufts, I plan on continuing my work in robotics, but more specifically, space robotics — combining two of my favorite things. Outer space is a place where you have to expect the unexpected, and that challenge is exactly why I want to deploy robots beyond our planet. Interplanetary exploration amazes me, so putting machines that I build into that environment is a dream worth working toward.</p>
+      <p>In my junior year of high school, I did something that would change my life: I took a robotics class. For the first time in school, I was genuinely struggling, and this struggle sparked something in me that caused me to work harder and more effectively than I ever had before. I would spend hours during and after school working on my team's robot, and when the janitors kicked me out, I would bring the robot home and continue there. I'm the type of person who is determined to push until I succeed. So every failure and setback would only drive me forward until I wasn't looking at a broken robot, I was looking at a completed project. At Tufts, I have continued this passion, starting with personal projects at first, and now doing research in the Nemitz robotics group, and my obsession hasn't wavered.</p>
+      <p>After I graduate from Tufts, I plan on continuing my work in robotics, but more specifically, space robotics, combining two of my favorite things. Outer space is a place where you have to expect the unexpected, and that challenge is exactly why I want to deploy robots beyond our planet. Moreover, interplanetary exploration amazes me, so putting machines that I helped build into the universe would be a dream come true.</p>
     </div>
+  </div>
   </div>
 </section>
 
@@ -399,6 +363,65 @@ section.active{display:block;}
 </footer>
 
 <script>
+// ─── IMAGE CONFIG ────────────────────────────────────────────────────────────
+// Set each value to a path inside the Images/ folder (e.g. 'Images/photo.jpg').
+// Leave as '' to show a placeholder.
+const IMAGES = {
+  // Hero headshot
+  HERO_PHOTO: 'Images/HEADSHOT.JPEG',
+
+  // Portfolio card thumbnails
+  GRIPPER_THUMB: 'Images/ADAPTIVE ONE.jpeg',
+  SWERVE_THUMB:  '/Images/SWERVE BOT ONE.jpeg',
+  ARM_THUMB:     'Images/3D ARM ONE.jpeg',
+  FTC_THUMB:     'Images/ROBIOT.png',
+  STOCK_THUMB:   'Images/STOCK ONE.png',
+  HOUSING_THUMB: 'Images/HOUSING ONE.png',
+  HAMMER_THUMB:  'Images/HAMMER GAME ONE.png',
+  DOG_THUMB:     'Images/DOGTREAT ONE.png',
+  ANIM_THUMB:    'Images/fortanim.mp4',
+  GUMBALL_THUMB: 'Images/GUMBALL ONE.jpg',
+
+  // Robotic Gripper detail images
+  GRIPPER_1: 'Images/ADAPTIVE ONE.jpeg', GRIPPER_2: 'Images/ADAP.jpeg', GRIPPER_3: 'Images/ADAPTER.jpeg',
+  GRIPPER_4: 'Images/ADATPIVE2.jpeg', GRIPPER_5: 'Images/ADAPT.png', GRIPPER_6: 'Images/ADAPTER.png', GRIPPER_7: 'Images/ADAPTW.png',
+  GRIPPER_VID1: 'https://www.youtube.com/shorts/D-NDVE-_Rj8',
+
+  // Swerve Drive detail images
+  SWERVE_1: 'Images/SWERVE BOT ONE.jpeg', SWERVE_2: 'Images/SWERRVE  BOT.jpeg', SWERVE_3: 'Images/SWERVE.jpeg',
+  SWERVE_4: 'Images/SWEEEERVE.PNG', SWERVE_5: 'Images/SWEREVVVE.png', SWERVE_6: 'Images/SWERVER.png',
+  SWERVE_VID1: 'https://www.youtube.com/shorts/waZ4yI-FekU',
+
+  // Robotic Arm detail images
+  ARM_5: 'Images/3CD AR .png', ARM_1: 'Images/3D ARM ONE.jpeg', ARM_3: 'Images/3DARM.jpeg',
+  ARM_4: 'Images/3D ARMM.png', ARM_2: 'Images/3Darmm.jpeg', ARM_6: 'Images/3DARMRM.png',
+  ARM_VID1: 'https://www.youtube.com/shorts/vR8ez7qSOTM',
+
+  // FTC detail images
+  FTC_1: 'Images/ROBIOT.png', FTC_2: 'Images/ROBOTCENTERAGE.png', FTC_3: 'Images/ROBOTCENTERSTAGE1.png',
+  FTC_4: 'Images/ROBOTCENTERSTAGE2.png', FTC_5: 'Images/ROBOTI.png',
+  FTC_VID1: 'https://www.youtube.com/watch?v=qv9qoMNUYsA', FTC_VID2: 'https://www.youtube.com/watch?v=bWCqd_OFPzo', FTC_VID3: 'https://www.youtube.com/shorts/aHMmfmxc4_U',
+
+  // Stock Ranker detail images
+  STOCK_1: 'Images/STOCK ONE.png', STOCK_2: 'Images/stocking.png', STOCK_3: 'Images/STOCKPROGRAM.png',
+  STOCK_4: 'Images/STOCKS.png', STOCK_5: 'Images/stoijk.png', STOCK_6: 'Images/STOXFKWROST.png',
+
+  // Housing Predictor detail images
+  HOUSING_1: 'Images/HOUSING ONE.png', HOUSING_2: 'Images/Housing2.png', HOUSING_3: 'Images/housoign3.png',
+
+  // Hammer Game detail images
+  HAMMER_1: 'Images/HAMMER GAME ONE.png', HAMMER_2: 'Images/HAMMER.png', HAMMER_3: 'Images/HAMMERED.png',
+
+  // Dog Treat Dispenser detail images
+  DOG_1: 'Images/DOGTREAT ONE.png', DOG_2: 'Images/DOG WHAT DOING.png', DOG_3: 'Images/DOGTREAT.png',
+  DOG_VID1: 'https://www.youtube.com/watch?v=Ix66RwwwNc4',
+
+  // Gumball Machine detail images
+  GUMBALL_1: 'Images/GUMBALL ONE.jpg', GUMBALL_4: 'Images/GUM.jpg', GUMBALL_3: 'Images/GUYMBALL.jpg',
+  GUMBALL_2: 'Images/GYAMDYAL.jpg', GUMBALL_5: 'Images/GUM B.png',
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
 const PROJECTS = [
   {
     title: "Robotic gripper for 6-axis robot (in progress)",
@@ -406,8 +429,9 @@ const PROJECTS = [
     date: "January 2025",
     overview: "Creating a 3D-printed gripper as a 25 times cheaper alternative to the Robotiq adaptive gripper. Gripper will be used in the Nemitz robot group at Tufts to autonomously build mine-disabling 3D-printed crab-like robots.",
     details: "Currently creating a 3D-printed gripper for the UR7e 6-axis robotic arm that can grab a wide variety of objects. Also planning on utilizing force sensors to allow the gripper to control its grip strength and detect objects. I started working on this project in Dr. Short's human-robot interaction lab at Tufts, but later shifted to Dr. Nemitz's robotics group at Tufts because their goals aligned better with mine. The main goal of this project is to create both a reliable, cheaper alternative to expensive adaptive grippers and one that can be controlled from a computer connected to the UR7e gripper.",
-    images: ["GRIPPER_1","GRIPPER_2","GRIPPER_3","GRIPPER_4","GRIPPER_5","GRIPPER_6"],
-    videos: ["GRIPPER_VID_1","GRIPPER_VID_2"]
+    thumb: "GRIPPER_THUMB",
+    images: ["GRIPPER_1","GRIPPER_2","GRIPPER_3","GRIPPER_4","GRIPPER_5","GRIPPER_6","GRIPPER_7"],
+    videos: ["GRIPPER_VID1"]
   },
   {
     title: "3D Printed Swerve Drive Robot",
@@ -415,8 +439,9 @@ const PROJECTS = [
     date: "February 2025 – April 2025",
     overview: "Built a fully 3D-printed swerve-drive robot with custom gear mechanisms. Fabricated a full CAD assembly, coded the robot in Arduino and Python, integrating game controller teleoperation.",
     details: "This robot was built to learn more about gear systems, utilizing compound gears for the driving of the wheels and gearing up the wheel pod. Additionally, I set the challenge to fully 3D print the robot, aside from the bearings, screws, and electronics used. I was able to learn how to create gears in CAD, improve my CAD assembly skills, and how to print with TPU, which I used for the wheel tracks to make them flexible.",
+    thumb: "SWERVE_THUMB",
     images: ["SWERVE_1","SWERVE_2","SWERVE_3","SWERVE_4","SWERVE_5","SWERVE_6"],
-    videos: ["SWERVE_VID_1","SWERVE_VID_2"]
+    videos: ["SWERVE_VID1"]
   },
   {
     title: "3D-Printed Robotic Arm",
@@ -424,8 +449,9 @@ const PROJECTS = [
     date: "July 2025 – August 2025",
     overview: "Created a 3D-printed robotic arm to explore different types of linkages commonly found in engineering systems.",
     details: "I used a 2-bar linkage to transform rotational motion into linear motion to extend the gripper out. I used a 4-bar linkage to keep the gripper at a constant angle as it went up and down. I wanted to see if I could model and 3D print a chain, so I made the rotator driven by a chain. Lastly, I was able to use a gear system to drive the gripper. I started with a CAD assembly, then I was able to 3D print all the parts and assemble the system.",
+    thumb: "ARM_THUMB",
     images: ["ARM_1","ARM_2","ARM_3","ARM_4","ARM_5","ARM_6"],
-    videos: ["ARM_VID_1","ARM_VID_2"]
+    videos: ["ARM_VID1"]
   },
   {
     title: "FIRST Tech Challenge — John Jay Robotics",
@@ -433,8 +459,9 @@ const PROJECTS = [
     date: "September 2023 – March 2024",
     overview: "Co-led a 15-student team to create robots that made it to the NY State Championship and World Championship. Developed CAD assemblies and programmed both autonomous and teleoperation systems in Java, utilizing vision software and various sensors.",
     details: "In my first year (Powerplay), I was the lead autonomous coder and junior captain. The robot's goal was to pick up cones and place them on poles. I used vision and pathing software for the autonomous code — the robot made it to the World Championship. Over the summer, I built a refined pathing software called Levine Localization. In my second year (Centerstage), I was team captain, in charge of CAD, building, and coding. The robot's goal was to pick up hexagons called pixels and place them on a board, shoot a paper airplane, and perform a pull-up. The robot was a finalist at the NY State Championship. I now mentor the four robotics teams at John Jay High School.",
-    images: ["FTC_1","FTC_2","FTC_3","FTC_4","FTC_5","FTC_6"],
-    videos: ["FTC_VID_1","FTC_VID_2"]
+    thumb: "FTC_THUMB",
+    images: ["FTC_1","FTC_2","FTC_3","FTC_4","FTC_5"],
+    videos: ["FTC_VID1","FTC_VID2","FTC_VID3"]
   },
   {
     title: "Machine Learning Stock Ranking Program",
@@ -442,8 +469,9 @@ const PROJECTS = [
     date: "January 2026",
     overview: "Created a machine learning algorithm using an Extra Trees ensemble model to predict which S&P 500 stocks are most likely to outperform the market over the next month, based on historical price, momentum, volatility, and liquidity features.",
     details: "I wanted to learn about machine learning while on winter break, and figured this would be a cool project. I used ChatGPT to figure out the basics and was able to work with it to understand how to build my program using an Extra Trees ensemble model trained on S&P 500 historical data.",
+    thumb: "STOCK_THUMB",
     images: ["STOCK_1","STOCK_2","STOCK_3","STOCK_4","STOCK_5","STOCK_6"],
-    videos: ["STOCK_VID_1"]
+    videos: []
   },
   {
     title: "Machine Learning Housing Prices Predictor",
@@ -451,8 +479,9 @@ const PROJECTS = [
     date: "January 2026",
     overview: "Created a machine learning algorithm using a Random Forest Regressor to accurately predict home sale prices from the Ames Housing dataset.",
     details: "Built preprocessing pipelines for missing data and categorical features, and evaluated performance using walk-forward validation and mean absolute error. This project deepened my understanding of feature engineering, model selection, and validation strategy in a real-world dataset context.",
-    images: ["HOUSING_1","HOUSING_2","HOUSING_3","HOUSING_4","HOUSING_5","HOUSING_6"],
-    videos: ["HOUSING_VID_1"]
+    thumb: "HOUSING_THUMB",
+    images: ["HOUSING_1","HOUSING_2","HOUSING_3"],
+    videos: []
   },
   {
     title: "CAD Hammer Game",
@@ -460,8 +489,9 @@ const PROJECTS = [
     date: "November 2025",
     overview: "Created a CAD design of a 'hammer game' similar to ones found in carnivals using Fusion 360. Learned explosion views, improved CAD assembly skills, and learned how to apply appearances to designs.",
     details: "After talking with a senior engineer, he gave me a list of CAD skills useful in engineering, so I took around an hour to learn them all. My goals were to create the model fast, create an exploded view, make more complex geometry, and add appearances. I started with a sketch of what I wanted, then made a full CAD model. The mallet has a few holes and blemishes to make it more challenging to model. After this, I made an exploded view of the full game.",
-    images: ["HAMMER_1","HAMMER_2","HAMMER_3","HAMMER_4","HAMMER_5","HAMMER_6"],
-    videos: ["HAMMER_VID_1"]
+    thumb: "HAMMER_THUMB",
+    images: ["HAMMER_1","HAMMER_2","HAMMER_3"],
+    videos: []
   },
   {
     title: "Dog Treat Dispenser",
@@ -469,8 +499,9 @@ const PROJECTS = [
     date: "April 2026 – May 2026",
     overview: "Ryan, who suffers from Cerebral Palsy, needed a dog-treat dispenser to attach to his wheelchair. This project improved my collaboration skills, taught me physics simulations in SolidWorks, and how to document work in a structured way.",
     details: "This was a group project in my intro to engineering design class at Tufts. Our goal was to create a dog treat dispenser for Ryan, a person with cerebral palsy in a wheelchair who had difficulty picking up individual treats due to his disability. The dispenser uses a funnel to collect all the treats, then a lever to move them into a slide where Ryan can pick them up. One requirement was a food-safe product, so we had to learn about food-safe filaments for 3D printing. I also learned how to collaborate on a CAD project where everyone creates their own parts, and how to run physics simulations in SolidWorks to build the funnel without jamming.",
-    images: ["DOG_1","DOG_2","DOG_3","DOG_4","DOG_5","DOG_6"],
-    videos: ["DOG_VID_1","DOG_VID_2"]
+    thumb: "DOG_THUMB",
+    images: ["DOG_1","DOG_2","DOG_3"],
+    videos: ["DOG_VID1"]
   },
   {
     title: "Fortnite Animation in 3ds Max",
@@ -478,8 +509,9 @@ const PROJECTS = [
     date: "December 2025",
     overview: "Created an animation in 3ds Max inspired by Fortnite. Learned modeling and animation skills in 3ds Max, and video editing skills in CapCut.",
     details: "For my CAD class, our final project was to create an animation in 3ds Max. I decided to make one inspired by Fortnite. 3ds Max was software I had never used before this class — we only covered it in the last month — so this project taught me how to create models, add visual masks, and make a full animation from scratch in 3ds Max.",
-    images: ["ANIM_1","ANIM_2","ANIM_3","ANIM_4","ANIM_5","ANIM_6"],
-    videos: ["ANIM_VID_1"]
+    thumb: "ANIM_THUMB",
+    images: [],
+    localVideo: "ANIM_THUMB"
   },
   {
     title: "Gumball Machine",
@@ -487,8 +519,9 @@ const PROJECTS = [
     date: "December 2025",
     overview: "A group project from my intro to manufacturing processes class at Tufts. Built a fully functional gumball machine utilizing processes including metal bending, riveting, and 3D-printing.",
     details: "This project gave me hands-on experience with a range of manufacturing processes I hadn't used before, including metal bending and riveting. Working as a group required coordinating different fabricated components into a single assembled product, which strengthened my collaboration and manufacturing planning skills.",
-    images: ["GUMBALL_1","GUMBALL_2","GUMBALL_3","GUMBALL_4","GUMBALL_5","GUMBALL_6"],
-    videos: ["GUMBALL_VID_1","GUMBALL_VID_2"]
+    thumb: "GUMBALL_THUMB",
+    images: ["GUMBALL_1","GUMBALL_2","GUMBALL_3","GUMBALL_4","GUMBALL_5"],
+    videos: []
   }
 ];
 
@@ -499,6 +532,43 @@ function showPage(id) {
   const navEl = document.getElementById('nav-' + id);
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
+}
+
+function isVideo(src) { return src && /\.(mp4|webm|mov)$/i.test(src); }
+
+function renderPortfolioGrid() {
+  const grid = document.getElementById('portfolio-grid');
+  grid.innerHTML = '';
+  PROJECTS.forEach((p, idx) => {
+    const src = IMAGES[p.thumb];
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.onclick = () => showProject(idx);
+    let thumbHTML;
+    if (!src) {
+      thumbHTML = `<div class="project-thumb-ph"><span>${p.title}</span><span class="ph-var">[${p.thumb}]</span></div>`;
+    } else if (isVideo(src)) {
+      thumbHTML = `<div class="project-thumb-wrap"><video class="project-thumb-video" src="${src}" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;"></video></div>`;
+    } else {
+      thumbHTML = `<img class="project-thumb" src="${src}" alt="${p.title}">`;
+    }
+    card.innerHTML = `${thumbHTML}<div class="project-label"><h3>${p.title}</h3><div class="proj-meta">${p.type} · ${p.date}</div></div>`;
+    grid.appendChild(card);
+  });
+
+  // Hover-to-play for video thumbs
+  grid.addEventListener('mouseover', e => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+    const vid = card.querySelector('.project-thumb-video');
+    if (vid) vid.play();
+  });
+  grid.addEventListener('mouseout', e => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+    const vid = card.querySelector('.project-thumb-video');
+    if (vid) { vid.pause(); vid.currentTime = 0; }
+  });
 }
 
 function showProject(idx) {
@@ -512,27 +582,52 @@ function showProject(idx) {
   // Gallery
   const gallery = document.getElementById('pd-gallery');
   gallery.innerHTML = '';
-  p.images.forEach(img => {
-    const ph = document.createElement('div');
-    ph.className = 'proj-gallery-ph';
-    ph.innerHTML = '<span>Project image</span><span class="ph-var">[' + img + '.jpg]</span>';
-    gallery.appendChild(ph);
-  });
+  if (p.images) {
+    p.images.forEach(key => {
+      const src = IMAGES[key];
+      if (src) {
+        const img = document.createElement('img');
+        img.className = 'proj-gallery-img';
+        img.src = src;
+        img.alt = key;
+        gallery.appendChild(img);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'proj-gallery-ph';
+        ph.innerHTML = '<span>Project image</span><span class="ph-var">[' + key + ']</span>';
+        gallery.appendChild(ph);
+      }
+    });
+  }
 
   // Videos
   const videos = document.getElementById('pd-videos');
   videos.innerHTML = '';
+
+  if (p.localVideo && IMAGES[p.localVideo]) {
+    const vid = document.createElement('video');
+    vid.src = IMAGES[p.localVideo];
+    vid.controls = true;
+    vid.style.cssText = 'width:100%;border-radius:4px;display:block;grid-column:1/-1;';
+    videos.appendChild(vid);
+  }
   if (p.videos && p.videos.length) {
-    const label = document.createElement('p');
-    label.style.cssText = 'font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;grid-column:1/-1;';
-    label.textContent = 'Videos';
-    videos.appendChild(label);
-    p.videos.forEach(vid => {
-      const wrap = document.createElement('div');
-      wrap.className = 'proj-video-wrap';
-      wrap.innerHTML = '<div class="proj-video-ph"><span>YouTube embed</span><span class="ph-var">Replace with: &lt;iframe src="https://www.youtube.com/embed/YOUR_ID"&gt;&lt;/iframe&gt;</span><span style="font-size:10px;color:#555;margin-top:4px;">[' + vid + ']</span></div>';
-      videos.appendChild(wrap);
-    });
+    const validVids = p.videos.map(key => IMAGES[key]).filter(Boolean);
+    if (validVids.length) {
+      const label = document.createElement('p');
+      label.style.cssText = 'font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;grid-column:1/-1;';
+      label.textContent = 'Videos';
+      videos.appendChild(label);
+      validVids.forEach(url => {
+        const embedUrl = url
+          .replace(/youtube\.com\/shorts\/([^?&]+).*/, 'youtube.com/embed/$1')
+          .replace(/youtube\.com\/watch\?v=([^&]+).*/, 'youtube.com/embed/$1');
+        const wrap = document.createElement('div');
+        wrap.className = 'proj-video-wrap';
+        wrap.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+        videos.appendChild(wrap);
+      });
+    }
   }
 
   document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
@@ -543,6 +638,33 @@ function showProject(idx) {
 }
 
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+
+// Initialize dynamic content
+renderPortfolioGrid();
+
+if (IMAGES.HERO_PHOTO) {
+  const img  = document.getElementById('hero-photo');
+  const ph   = document.getElementById('hero-photo-ph');
+  const hint = document.getElementById('crop-hint');
+  img.src = IMAGES.HERO_PHOTO;
+  img.style.display = 'block';
+  ph.style.display  = 'none';
+  hint.style.display = 'block';
+
+  // Drag-to-crop: drag inside circle to reposition the photo
+  const wrap = document.getElementById('hero-photo-wrap');
+  let dragging = false, startX, startY, posX = 50, posY = 10;
+  img.style.objectPosition = `${posX}% ${posY}%`;
+  wrap.addEventListener('mousedown', e => { dragging = true; startX = e.clientX; startY = e.clientY; e.preventDefault(); });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    posX = Math.max(0, Math.min(100, posX - (e.clientX - startX) * 0.2));
+    posY = Math.max(0, Math.min(100, posY - (e.clientY - startY) * 0.2));
+    img.style.objectPosition = `${posX}% ${posY}%`;
+    startX = e.clientX; startY = e.clientY;
+  });
+  document.addEventListener('mouseup', () => { dragging = false; });
+}
 
 // Hover-to-play video on project cards
 document.addEventListener('mouseover', e => {
