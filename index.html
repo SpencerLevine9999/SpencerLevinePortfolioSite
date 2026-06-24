@@ -41,8 +41,8 @@ section.active{display:block;}
 /* HOME */
 #home{background:url('Images/BACKGROUNDFRONTPAGE.png') center center/cover no-repeat;min-height:calc(100vh - var(--nav-h));}
 .hero{min-height:calc(100vh - var(--nav-h));display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:60px 40px;gap:60px;max-width:1100px;margin:0 auto;background:rgba(245,244,241,0.82);backdrop-filter:blur(2px);}
-.hero-photo-wrap{width:280px;height:280px;border-radius:50%;overflow:hidden;margin:0 auto 32px;border:3px solid var(--border);position:relative;cursor:move;user-select:none;}
-.hero-photo-wrap img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center top;}
+.hero-photo-wrap{width:280px;height:280px;border-radius:50%;overflow:hidden;margin:0 auto 32px;border:3px solid var(--border);position:relative;}
+.hero-photo-wrap img{position:absolute;width:160%;height:160%;top:-10%;left:-30%;object-fit:cover;object-position:center 15%;}
 .photo-placeholder{width:100%;height:100%;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;text-align:center;padding:16px;flex-direction:column;gap:6px;}
 .ph-var{font-family:monospace;background:#ccc;padding:2px 6px;border-radius:3px;font-size:10px;}
 .crop-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:-20px;margin-bottom:20px;}
@@ -156,7 +156,6 @@ section.active{display:block;}
           <span class="ph-var">IMAGES.HERO_PHOTO</span>
         </div>
       </div>
-      <p class="crop-hint" id="crop-hint" style="display:none;">Drag photo to reposition</p>
       <p class="hero-bio">Mechanical engineering student at Tufts University with a passion for robotics and CAD design. Experienced in translating CAD designs into functional prototypes using 3D-printing, and hands-on work with mechanical and electrical components.</p>
     </div>
     <div class="hero-right">
@@ -218,126 +217,6 @@ section.active{display:block;}
     <a class="resume-dl" href="Images/Spencer Levine Resume Eng (digital) 2 pages (16).pdf" download>↓ Download PDF Resume</a>
     <div style="width:100%;margin-bottom:36px;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
       <iframe src="Images/Spencer Levine Resume Eng (digital) 2 pages (16).pdf" width="100%" height="900px" style="display:block;border:none;"></iframe>
-    </div>
-
-    <div class="resume-section">
-      <div class="resume-section-title">Education</div>
-      <div class="resume-block">
-        <div class="resume-block-header">
-          <span class="resume-block-title">Tufts University School of Engineering</span>
-          <span class="resume-block-date">Expected May 2028</span>
-        </div>
-        <div class="resume-block-sub">Bachelor of Science in Mechanical Engineering · GPA: 3.67 / 4.0 · Dean's List</div>
-        <ul><li>Relevant Coursework: Computer-Aided Design, Materials & Manufacturing I, Mechanics I & II, Engineering Design I, Thermal Fluid Systems I, Ethics of Product Design, Energy Storage Systems</li></ul>
-      </div>
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">John Jay High School</span></div>
-        <ul>
-          <li>Co-led a 15-student robotics team to FTC NY State Championship and World Championship</li>
-          <li>Excellence Robotics Award; Excellence in Computer Science; Clarkson University Leadership Award; Honor Roll</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="resume-section">
-      <div class="resume-section-title">Skills & Interests</div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:500;">CAD</p>
-      <div class="skills-grid" style="margin-bottom:14px;">
-        <span class="skill-pill">Fusion 360</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">Onshape</span><span class="skill-pill">AutoCAD</span><span class="skill-pill">3ds Max</span><span class="skill-pill">Revit</span>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:500;">Computer</p>
-      <div class="skills-grid" style="margin-bottom:14px;">
-        <span class="skill-pill">Java</span><span class="skill-pill">Python</span><span class="skill-pill">JavaScript</span>
-      </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:500;">Interests</p>
-      <div class="skills-grid">
-        <span class="skill-pill">Backflips</span><span class="skill-pill">Working out</span><span class="skill-pill">Skiing</span><span class="skill-pill">Golf</span><span class="skill-pill">Guitar</span><span class="skill-pill">Space / The Universe</span>
-      </div>
-    </div>
-
-    <div class="resume-section">
-      <div class="resume-section-title">Relevant Work</div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">UTX Inc.</span><span class="resume-block-date">May 2026 – Present</span></div>
-        <div class="resume-block-sub">Intern · Holmes, New York</div>
-        <ul>
-          <li>Design products to streamline the inspection and production of transducers to increase efficiency by 15%</li>
-          <li>Convert 2D drawings from pen and paper and AutoCAD into 3D models using Fusion</li>
-          <li>Operate sand blasters, lathes, mills, and other machinery to manufacture high-tolerance transducers</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Nemitz Robotics Group</span><span class="resume-block-date">April 2026 – Present</span></div>
-        <div class="resume-block-sub">Intern · Medford, Massachusetts</div>
-        <ul><li>Designing a gripper (see projects) to autonomously build crab robots that will disable mines in former war zones</li></ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">John Jay Robotics</span><span class="resume-block-date">Mar 2024 – Present</span></div>
-        <div class="resume-block-sub">FIRST Robotics Mentor · Cross River, New York</div>
-        <ul>
-          <li>Mentor four robotics teams of high school students competing in the FIRST Tech Challenge (FTC), including one that qualified for the FTC World Championship</li>
-          <li>Engage 30+ non-engineering-background students in skills such as CAD, Java coding, and basic robot design</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Elaine Short Human Robot Interaction Lab</span><span class="resume-block-date">Jan 2026 – April 2026</span></div>
-        <div class="resume-block-sub">Research Assistant · Medford, Massachusetts</div>
-        <ul>
-          <li>Designed a gripper (see projects) to be a 25 times less expensive alternative to the Robotiq adaptive gripper</li>
-          <li>Assisted PhD students with various projects, like construction of robotic environments and model robotic arms</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Giuliante Machine Tool Inc.</span><span class="resume-block-date">May 2025 – Aug 2025</span></div>
-        <div class="resume-block-sub">Intern · Peekskill, New York</div>
-        <ul>
-          <li>Designed and modeled 20+ parts in SolidWorks to be later machined and sold to 10+ clients</li>
-          <li>Operated various machines, including CNCs, shapers, and bandsaws, to make gears and shafts</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="resume-section">
-      <div class="resume-section-title">Prominent Projects</div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Robotic Gripper for 6-axis robotic arm</span><span class="resume-block-date">Jan 2026 – Present</span></div>
-        <ul>
-          <li>Create a 3D-printed adaptive gripper to be a 25 times cheaper version of the Robotiq adaptive gripper</li>
-          <li>Utilize force sensors to allow the gripper to control its grip strength and detect objects</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Stock Predictor</span><span class="resume-block-date">Jan 2026</span></div>
-        <ul>
-          <li>Coded a machine learning algorithm using an Extra Trees regressor ensemble model</li>
-          <li>Program predicts which S&P 500 stocks would perform the best in a given month</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Robotic Arm</span><span class="resume-block-date">Jul 2025 – Aug 2025</span></div>
-        <ul>
-          <li>Created a robotic arm to explore different linkages, such as 4-bars and chain-driven components</li>
-          <li>Built a full CAD assembly of the robot, then 3D printed and built</li>
-        </ul>
-      </div>
-
-      <div class="resume-block">
-        <div class="resume-block-header"><span class="resume-block-title">Swerve Drive Robot</span><span class="resume-block-date">Feb 2025 – Apr 2025</span></div>
-        <ul>
-          <li>Built a fully 3D-printed swerve-drive robot with custom gear mechanisms</li>
-          <li>Fabricated a full CAD assembly, coded the robot in Arduino and Python, integrating game controller teleoperation</li>
-        </ul>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -643,27 +522,11 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
 renderPortfolioGrid();
 
 if (IMAGES.HERO_PHOTO) {
-  const img  = document.getElementById('hero-photo');
-  const ph   = document.getElementById('hero-photo-ph');
-  const hint = document.getElementById('crop-hint');
+  const img = document.getElementById('hero-photo');
+  const ph  = document.getElementById('hero-photo-ph');
   img.src = IMAGES.HERO_PHOTO;
   img.style.display = 'block';
   ph.style.display  = 'none';
-  hint.style.display = 'block';
-
-  // Drag-to-crop: drag inside circle to reposition the photo
-  const wrap = document.getElementById('hero-photo-wrap');
-  let dragging = false, startX, startY, posX = 50, posY = 10;
-  img.style.objectPosition = `${posX}% ${posY}%`;
-  wrap.addEventListener('mousedown', e => { dragging = true; startX = e.clientX; startY = e.clientY; e.preventDefault(); });
-  document.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    posX = Math.max(0, Math.min(100, posX - (e.clientX - startX) * 0.2));
-    posY = Math.max(0, Math.min(100, posY - (e.clientY - startY) * 0.2));
-    img.style.objectPosition = `${posX}% ${posY}%`;
-    startX = e.clientX; startY = e.clientY;
-  });
-  document.addEventListener('mouseup', () => { dragging = false; });
 }
 
 // Hover-to-play video on project cards
