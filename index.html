@@ -145,7 +145,7 @@ section.active{display:block;}
   .hero { grid-template-columns: 1fr; padding: 20px 20px 32px; gap: 0px; align-items: start; min-height: auto; width: 100%; max-width: 100%; overflow-x: hidden; }
   .hero-left { display: flex; justify-content: center; }
   .hero-right { margin-top: 0px; padding: 0 20px; }
-  .hero-photo-wrap { width: 135px; height: 135px; margin: 20px auto 16px; }
+  .hero-photo-wrap { margin: 20px auto 16px; }
   .hero-title { margin-bottom: 8px; }
   .hero-title h1 { font-size: 40px; }
   .eyebrow { font-size: 9px; letter-spacing: 0.05em; }
@@ -174,7 +174,6 @@ section.active{display:block;}
 @media (max-width: 1100px) {
   .hero { padding: 20px 40px 40px; gap: 30px; width: 100%; }
   .hero-title h1 { font-size: 52px; }
-  .hero-photo-wrap { width: 240px; height: 240px; }
   .portfolio-grid { padding: 0 20px; }
   .proj-detail-wrap { padding: 0 20px 40px; }
   .resume-wrap { padding: 40px 20px 40px; }
@@ -187,7 +186,7 @@ section.active{display:block;}
   .hero { grid-template-columns: 1fr; padding: 20px 30px 32px; gap: 0px; min-height: auto; }
   #home { min-height: auto; }
   .hero-right { margin-top: 0px; }
-  .hero-photo-wrap { width: 180px; height: 180px; margin: 20px auto 16px; }
+  .hero-photo-wrap { margin: 20px auto 16px; }
   .hero-title h1 { font-size: 48px; }
   .proj-header { grid-template-columns: 1fr; gap: 24px; }
   .portfolio-grid { grid-template-columns: 1fr; }
@@ -320,6 +319,9 @@ section.active{display:block;}
 </footer>
 
 <script>
+if (location.protocol === 'http:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+  location.replace('https://' + location.host + location.pathname + location.search + location.hash);
+}
 // ─── LAYOUT CONFIG ───────────────────────────────────────────────────────────
 const LAYOUT = {
   heroTopPadding: '0px',      // decrease this to move everything up
@@ -327,7 +329,7 @@ const LAYOUT = {
   heroLeftColumn: '0.6fr',     // decrease this to shrink left col, pushing right col left
   heroRightColumn: '1fr',
   heroRightMarginTop: '20px',  // decrease this to move right section up
-  photoSize: '300px',
+  photoSize: 'clamp(135px, 25vw, 300px)',
   photoScale: '1.65',
   photoOffsetX: '3%',
   photoOffsetY: '0%',
