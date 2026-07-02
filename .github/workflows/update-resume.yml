@@ -1,0 +1,48 @@
+name: Update Resume PDF
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6:00 AM UTC
+  workflow_dispatch:
+
+jobs:
+  update-resume:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download resume PDF from Google Docs
+        run: |
+          curl -L \
+            "https://docs.google.com/document/d/13bbIkO5YmXtK79DjVjqKNjmPXxwP8q3yjKANP_MJ4O4/export?format=pdf" \
+            -o resume_new.pdf
+
+      - name: Check if PDF changed
+        id: diff
+        run: |
+          if [ -f resume.pdf ]; then
+            if cmp -s resume.pdf resume_new.pdf; then
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Replace resume PDF
+        if: steps.diff.outputs.changed == 'true'
+        run: mv resume_new.pdf resume.pdf
+
+      - name: Commit and push updated resume
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add resume.pdf
+          git commit -m "chore: auto-update resume PDF"
+          git push
