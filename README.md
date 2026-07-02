@@ -1,1 +1,1 @@
-# Spencer Levine — Portfolio Website - Claude created ts, thank you anthropic!!
+# Spencer Levine — Portfolio Website
