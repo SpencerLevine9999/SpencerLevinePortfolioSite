@@ -65,6 +65,8 @@ section.active{display:block;}
 .skills-header{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#000;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
 .hero-skills{display:grid;grid-template-columns:repeat(5,auto);gap:8px;justify-content:start;}
 .skill-tag{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid rgba(0,0,0,0.3);color:#000;background:rgba(255,255,255,0.5);backdrop-filter:blur(4px);min-width:var(--skill-bubble-width);text-align:center;white-space:nowrap;}
+.skill-tag-link{cursor:pointer;color:#2563eb;font-weight:700;border-color:#2563eb;background:rgba(37,99,235,0.08);transition:text-decoration 0.12s,background 0.12s;}
+.skill-tag-link:hover{text-decoration:underline;background:rgba(37,99,235,0.16);}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
 .cta-btn{display:inline-block;padding:14px 28px;border-radius:40px;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Poppins',sans-serif;transition:transform 0.12s,opacity 0.12s;min-width:var(--cta-btn-width);text-align:center;}
 .cta-btn:hover{transform:translateY(-1px);opacity:0.9;}
@@ -236,7 +238,7 @@ section.active{display:block;}
       <div class="hero-skills-wrap">
         <div class="skills-header">Skills</div>
         <div class="hero-skills">
-          <span class="skill-tag">Fusion</span><span class="skill-tag">SolidWorks</span><span class="skill-tag">Onshape</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Product Design</span><span class="skill-tag">3D-printing</span><span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag" style="cursor:pointer;background:rgba(212,175,55,0.15);border-color:var(--gold);color:var(--gold);font-weight:700;" onclick="showProject(PROJECTS.findIndex(p=>p.title==='Backflips'))">Backflips</span>
+          <span class="skill-tag">Fusion</span><span class="skill-tag">SolidWorks</span><span class="skill-tag">Onshape</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Product Design</span><span class="skill-tag">3D-printing</span><span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag skill-tag-link" onclick="showProject(PROJECTS.findIndex(p=>p.title==='Backflips'))">Backflips</span>
         </div>
       </div>
       <p class="hero-bio">Mechanical engineering student at Tufts University with a passion for robotics and CAD design. Experienced in translating CAD designs into functional prototypes using 3D-printing, and hands-on work with mechanical and electrical components.</p>
