@@ -108,7 +108,7 @@ section.active{display:block;}
 .proj-overview p{font-size:15px;line-height:1.75;color:#333;margin-bottom:16px;}
 .proj-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:40px;}
 .proj-gallery-wrap{position:relative;overflow:hidden;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.1);cursor:zoom-in;background:#e8e6e2;outline:1px solid transparent;aspect-ratio:4/3;}
-.proj-gallery-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;margin:-1px;transition:transform 0.2s ease;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;image-rendering:crisp-edges;}
+.proj-gallery-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;margin:-1px;transition:transform 0.2s ease;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
 .proj-gallery-wrap:hover .proj-gallery-img{filter:brightness(0.97);}
 .proj-gallery-ph{width:100%;aspect-ratio:4/3;background:#e0ddd8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:10px;color:#999;text-align:center;padding:12px;border-radius:4px;}
 .proj-videos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px;}
@@ -382,6 +382,10 @@ const IMAGES = {
   DOG_THUMB:     'Images/DOGTREAT%20ONE.png',
   ANIM_THUMB:    'Images/fortanim.mp4',
   GUMBALL_THUMB: 'Images/GUMBALL%20ONE.jpg',
+  ELAINE_THUMB:  'Images/ELAINE1.png',
+
+  // Elaine Short Human Robotics Interaction Lab detail images
+  ELAINE_1: 'Images/ELAINE1.png', ELAINE_2: 'Images/ELAINE2.png', ELAINE_3: 'Images/ELAINE3.png',
 
   // Robotic Gripper detail images
   GRIPPER_1: 'Images/ADAPTIVE%20ONE.jpeg', GRIPPER_2: 'Images/ADAP.jpeg', GRIPPER_3: 'Images/ADAPTER.jpeg',
@@ -519,6 +523,23 @@ const PROJECTS = [
     thumb: "FTC_THUMB",
     images: ["FTC_1","FTC_2","FTC_3","FTC_4","FTC_5"],
     videos: ["FTC_VID1","FTC_VID2","FTC_VID3"]
+  },
+  {
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    galleryAspect: '4/3', imgX: 0, imgY: 0, imgScale: 1, imageAdjust: {
+      ELAINE_1: {x:50,y:50,scale:1},
+      ELAINE_2: {x:100,y:50,scale:1},
+      ELAINE_3: {x:50,y:50,scale:1},
+    },
+    category: "engineering",
+    title: "Elaine Short Human Robotics Interaction Lab",
+    type: "Research Assistant",
+    date: "January 2026 - April 2026",
+    overview: "Began the design process of my <span class=\"skill-tag-link\" style=\"border:none;background:none;padding:0;\" onclick=\"showProject(PROJECTS.findIndex(p=>p.title==='Robotic gripper for 6-axis robot (in progress)'))\">adaptive gripper project</span>. Also supported PhD research by designing components for robotic environments and model robotic arms.",
+    details: "In this lab, I worked with different PhD students to assist with their research. One task I did was model an environment for one student to train a robot arm to do push T: a task that uses machine learning to push a T-shaped object at one point of contact into a target position and orientation. I modeled the environment in Fusion and designed an end-effector for the arm to complete its task, as well as the T to be pushed. Next, for another project, a robotic arm had to pick up cans and place them on a shelf autonomously. To assist with this project, I designed a shelf that could be easily assembled with easily replaceable components in case the robot went awry and broke part of the shelf. Lastly, I designed a mock robotic arm and gripper to be used at an educational showcase.",
+    thumb: "ELAINE_THUMB",
+    images: ["ELAINE_1","ELAINE_2","ELAINE_3"],
+    videos: []
   },
   {
     thumbX: 50, thumbY: 50, thumbScale: 1,
@@ -711,8 +732,8 @@ function showProject(idx) {
   document.getElementById('pd-overview-block').style.display = useSimple ? 'none' : '';
   const simpleDesc = document.getElementById('pd-simple-desc');
   simpleDesc.style.display = useSimple ? '' : 'none';
-  simpleDesc.textContent = useSimple ? p.overview : '';
-  document.getElementById('pd-overview').textContent = p.overview;
+  simpleDesc.innerHTML = useSimple ? p.overview : '';
+  document.getElementById('pd-overview').innerHTML = p.overview;
   document.getElementById('pd-details').textContent = p.details;
 
   // Gallery
