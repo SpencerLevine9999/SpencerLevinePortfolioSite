@@ -648,6 +648,7 @@ const PROJECTS = [
       ELAINE_3: {x:50,y:50,scale:1},
     },
     category: "engineering",
+    displayOrder: 3.5,
     title: "Elaine Short Human Robotics Interaction Lab",
     type: "Research Assistant",
     date: "January 2026 - April 2026",
@@ -681,6 +682,7 @@ function renderPortfolioGrid() {
   ];
   CATEGORIES.forEach(cat => {
     const catProjects = PROJECTS.map((p, idx) => ({ p, idx })).filter(({ p }) => p.category === cat.key);
+    catProjects.sort((a, b) => (a.p.displayOrder !== undefined ? a.p.displayOrder : a.idx) - (b.p.displayOrder !== undefined ? b.p.displayOrder : b.idx));
     if (!catProjects.length) return;
     const heading = document.createElement('div');
     heading.className = 'portfolio-section-heading';
