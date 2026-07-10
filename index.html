@@ -56,7 +56,7 @@ section.active{display:block;}
 .photo-placeholder{width:100%;height:100%;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;text-align:center;padding:16px;flex-direction:column;gap:6px;}
 .ph-var{font-family:monospace;background:#ccc;padding:2px 6px;border-radius:3px;font-size:10px;}
 .crop-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:-20px;margin-bottom:20px;}
-.hero-bio{font-size:16px;line-height:1.7;color:#000;text-align:left;max-width:575px;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
+.hero-bio{font-size:16px;line-height:1.7;color:#000;text-align:left;max-width:575px;margin:0;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
 .hero-right{display:flex;flex-direction:column;gap:24px;margin-top:var(--hero-right-margin-top);}
 .eyebrow{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#000;margin-bottom:10px;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
 .hero-title h1{font-family:'Poppins',sans-serif;font-size:var(--name-size);font-weight:700;line-height:1.0;color:#000;text-shadow:-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,2px 2px 0 #fff,0 0 8px #fff;}
@@ -67,7 +67,7 @@ section.active{display:block;}
 .skill-tag{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid rgba(0,0,0,0.3);color:#000;background:rgba(255,255,255,0.5);backdrop-filter:blur(4px);min-width:var(--skill-bubble-width);text-align:center;white-space:nowrap;}
 .skill-tag-link{cursor:pointer;color:#2563eb;font-weight:700;border-color:#2563eb;background:rgba(37,99,235,0.08);transition:text-decoration 0.12s,background 0.12s;}
 .skill-tag-link:hover{text-decoration:underline;background:rgba(37,99,235,0.16);}
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-start;margin:0;}
 .cta-btn{display:inline-block;padding:14px 28px;border-radius:40px;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Poppins',sans-serif;transition:transform 0.12s,opacity 0.12s;min-width:var(--cta-btn-width);text-align:center;}
 .cta-btn:hover{transform:translateY(-1px);opacity:0.9;}
 .cta-gold{background:var(--gold);color:#fff;}
@@ -835,7 +835,32 @@ let _lastBP = getBreakpoint();
 window.addEventListener('resize', () => {
   const bp = getBreakpoint();
   if (bp !== _lastBP) { _lastBP = bp; renderPortfolioGrid(); }
+  syncHeroCtaWidths();
 });
+
+// Match the bio text and CTA buttons to the rendered width of the skills grid,
+// so both sit centered within that same span rather than the full hero column.
+function syncHeroCtaWidths() {
+  const skills = document.querySelector('.hero-skills');
+  const bio = document.querySelector('.hero-bio');
+  const ctas = document.querySelector('.hero-ctas');
+  if (!skills || !bio || !ctas) return;
+  if (getBreakpoint() === 'mobile') {
+    bio.style.width = '';
+    ctas.style.width = '';
+    return;
+  }
+  const w = skills.getBoundingClientRect().width;
+  if (w > 0) {
+    bio.style.width = w + 'px';
+    ctas.style.width = w + 'px';
+  }
+}
+syncHeroCtaWidths();
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(syncHeroCtaWidths);
+}
+window.addEventListener('load', syncHeroCtaWidths);
 
 const initialHash = location.hash.slice(1) || 'home';
 const validPages = ['home','portfolio','resume','about'];
