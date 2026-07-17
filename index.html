@@ -97,9 +97,9 @@ section.active{display:block;}
 
 /* PROJECT DETAIL PAGE */
 .proj-detail-wrap{max-width:1100px;margin:0 auto;padding:0 40px 60px;}
-.proj-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;padding:24px 0;text-decoration:none;transition:color 0.15s;}
+.proj-back{display:inline-flex;align-items:center;gap:8px;font-size:21px;font-weight:600;color:var(--gold);cursor:pointer;padding:24px 0;text-decoration:none;transition:color 0.15s;}
 .proj-back:hover{color:var(--text);}
-.proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+.proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:48px;padding-bottom:40px;}
 .proj-header h1{font-family:'Poppins',sans-serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:28px;}
 .proj-meta-block{display:flex;flex-direction:column;gap:16px;}
 .proj-meta-item label{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
@@ -268,7 +268,7 @@ section.active{display:block;}
       <div>
         <h1 id="pd-title"></h1>
         <div class="proj-meta-block">
-          <div class="proj-meta-item"><label>Project type</label><span id="pd-type"></span></div>
+          <div class="proj-meta-item" id="pd-type-row"><label>Project type</label><span id="pd-type"></span></div>
           <div class="proj-meta-item" id="pd-date-row"><label>Date</label><span id="pd-date"></span></div>
         </div>
       </div>
@@ -632,12 +632,13 @@ const PROJECTS = [
     thumbX: 50, thumbY: 50, thumbScale: 1,
     galleryAspect: '4/3', imgX: 0, imgY: 0, imgScale: 1, imageAdjust: {},
     title: "Backflips",
-    type: "Backflips",
+    type: "",
     date: "",
-    overview: "I can backflip.",
-    details: "I can backflip.",
+    overview: "",
+    details: "",
     thumb: "BACKFLIP_THUMB",
     images: [],
+    videos: [],
     localVideo: "BACKFLIP_ONE"
   },
   {
@@ -728,6 +729,7 @@ function showProject(idx) {
   const p = PROJECTS[idx];
   document.getElementById('pd-title').textContent = p.title;
   document.getElementById('pd-type').textContent = p.type;
+  document.getElementById('pd-type-row').style.display = p.type ? '' : 'none';
   document.getElementById('pd-date').textContent = p.date;
   document.getElementById('pd-date-row').style.display = p.date ? '' : 'none';
   const useSimple = p.category === 'other';
