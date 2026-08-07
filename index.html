@@ -56,19 +56,20 @@ section.active{display:block;}
 .photo-placeholder{width:100%;height:100%;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;text-align:center;padding:16px;flex-direction:column;gap:6px;}
 .ph-var{font-family:monospace;background:#ccc;padding:2px 6px;border-radius:3px;font-size:10px;}
 .crop-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:-20px;margin-bottom:20px;}
-.hero-bio{font-size:16px;line-height:1.7;color:#000;text-align:left;max-width:575px;margin:0;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
-.hero-right{display:flex;flex-direction:column;gap:24px;margin-top:var(--hero-right-margin-top);}
-.eyebrow{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#000;margin-bottom:10px;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
+.hero-bio{font-size:16px;line-height:1.7;color:#000;text-align:center;max-width:700px;margin:0 auto;background:rgba(255,255,255,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:16px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.12);}
+.hero-right{display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;margin-top:var(--hero-right-margin-top);}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#000;margin-bottom:10px;text-align:center;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
+.hero-title{text-align:center;}
 .hero-title h1{font-family:'Poppins',sans-serif;font-size:var(--name-size);font-weight:700;line-height:1.0;color:#000;text-shadow:-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,2px 2px 0 #fff,0 0 8px #fff;}
 .hero-title h1 span{color:var(--gold);}
-.hero-skills-wrap{display:flex;flex-direction:column;gap:10px;}
+.hero-skills-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
 .skills-header{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#000;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;}
-.hero-skills{display:grid;grid-template-columns:repeat(5,auto);gap:8px;justify-content:start;}
-.skill-tag{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid rgba(0,0,0,0.3);color:#000;background:rgba(255,255,255,0.5);backdrop-filter:blur(4px);min-width:var(--skill-bubble-width);text-align:center;white-space:nowrap;}
-.skill-tag-link{cursor:pointer;color:#2563eb;font-weight:700;border-color:#2563eb;background:rgba(37,99,235,0.08);transition:text-decoration 0.12s,background 0.12s;}
-.skill-tag-link:hover{text-decoration:underline;background:rgba(37,99,235,0.16);}
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-start;margin:0;}
-.cta-btn{display:inline-block;padding:clamp(10px,3vw,14px) clamp(10px,6vw,28px);border-radius:40px;font-size:clamp(12px,2.6vw,15px);font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Poppins',sans-serif;transition:transform 0.12s,opacity 0.12s;min-width:clamp(0px,20vw,var(--cta-btn-width));text-align:center;}
+.hero-skills{display:grid;grid-template-columns:repeat(5,auto);gap:8px;justify-content:center;}
+.skill-tag{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid rgba(0,0,0,0.35);color:#000;background:rgba(255,255,255,0.85);backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(0,0,0,0.12);min-width:var(--skill-bubble-width);text-align:center;white-space:nowrap;}
+.skill-tag-link{cursor:pointer;color:#2563eb;font-weight:700;border-color:#2563eb;background:rgba(219,231,254,0.85);backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(0,0,0,0.12);transition:text-decoration 0.12s,background 0.12s;}
+.skill-tag-link:hover{text-decoration:underline;background:rgba(191,212,253,0.9);}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:0;}
+.cta-btn{display:inline-block;padding:clamp(10px,3vw,14px) clamp(10px,6vw,28px);border-radius:40px;font-size:clamp(12px,2.6vw,15px);font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Poppins',sans-serif;transition:transform 0.12s,opacity 0.12s;min-width:clamp(0px,20vw,var(--cta-btn-width));text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.35);}
 .cta-btn:hover{transform:translateY(-1px);opacity:0.9;}
 .cta-gold{background:var(--gold);color:#fff;}
 .cta-red{background:var(--red);color:#fff;}
@@ -147,17 +148,19 @@ section.active{display:block;}
   .nav-links a { padding: 8px 8px; font-size: 11px; }
 
   #home { min-height: auto; overflow: hidden; }
-  .hero { grid-template-columns: 1fr; padding: 20px 20px 32px; gap: 0px; align-items: start; min-height: auto; width: 100%; max-width: 100%; overflow-x: hidden; }
-  .hero-left { display: flex; justify-content: center; }
-  .hero-right { margin-top: 0px; padding: 0 20px; }
+  .hero { grid-template-columns: 1fr; padding: 20px 20px 32px; gap: 0px; align-items: start; justify-items: center; min-height: auto; width: 100%; max-width: 100%; overflow-x: hidden; }
+  .hero-left { display: flex; justify-content: center; width: 100%; }
+  .hero-right { margin-top: 0px; padding: 0 20px; align-items: center; text-align: center; width: 100%; }
   .hero-photo-wrap { margin: 20px auto 16px; }
-  .hero-title { margin-bottom: 8px; }
+  .hero-title { margin-bottom: 8px; text-align: center; }
   .hero-title h1 { font-size: 40px; }
-  .eyebrow { letter-spacing: 0.05em; }
-  .hero-bio { font-size: 14px; background: none; padding: 0; }
-  .hero-ctas { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; }
+  .eyebrow { letter-spacing: 0.05em; text-align: center; }
+  .hero-skills-wrap { align-items: center; }
+  .hero-bio { font-size: 14px; padding: 12px 16px; text-align: center; margin-left: auto; margin-right: auto; }
+  .hero-ctas { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; justify-content: center; }
   .cta-btn { flex: 1; min-width: 0; }
-  .hero-skills { display: grid; grid-template-columns: repeat(3, auto); flex-wrap: wrap; }
+  .hero-skills { display: flex; flex-wrap: wrap; justify-content: center; }
+  .skill-tag { min-width: 0; padding: 5px 10px; font-size: 11px; }
 
   .page-header { flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px 20px 16px; }
   .page-header p { text-align: left; max-width: 100%; }
@@ -174,6 +177,17 @@ section.active{display:block;}
   .about-photo { height: 380px; }
 
   footer { flex-direction: column; align-items: flex-start; padding: 20px; gap: 12px; }
+}
+
+@media (max-width: 400px) {
+  .hero { padding: 16px 12px 24px; }
+  .hero-right { padding: 0 12px; }
+  .hero-title h1 { font-size: 32px; }
+  .hero-bio { padding: 10px 14px; font-size: 13px; }
+  .hero-ctas { gap: 6px; }
+  .cta-btn { padding: clamp(8px,3vw,10px) clamp(6px,4vw,12px); font-size: 11px; }
+  .hero-skills { gap: 6px; }
+  .skill-tag { padding: 4px 8px; font-size: 10px; }
 }
 
 @media (max-width: 1100px) {
@@ -841,23 +855,49 @@ let _lastBP = getBreakpoint();
 window.addEventListener('resize', () => {
   const bp = getBreakpoint();
   if (bp !== _lastBP) { _lastBP = bp; renderPortfolioGrid(); }
+  syncSkillTagWidths();
   syncHeroCtaWidths();
 });
 
-// Match the bio text and CTA buttons to the rendered width of the skills grid,
-// so both sit centered within that same span rather than the full hero column.
+// Size every skill bubble to match the widest one, so they're all uniform
+// (and stay single-line, since white-space:nowrap keeps each label unbroken).
+function syncSkillTagWidths() {
+  const tags = document.querySelectorAll('.skill-tag');
+  if (!tags.length) return;
+  tags.forEach(t => { t.style.width = 'auto'; });
+  let max = 0;
+  tags.forEach(t => { max = Math.max(max, t.getBoundingClientRect().width); });
+  tags.forEach(t => { t.style.width = max + 'px'; });
+}
+syncSkillTagWidths();
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(syncSkillTagWidths);
+}
+window.addEventListener('load', syncSkillTagWidths);
+
+// Match the bio text, CTA buttons, and skills grid to the same shared width,
+// so all three (plus the name/eyebrow above, centered via hero-right) share one
+// visual center line instead of each sitting at its own natural width.
 function syncHeroCtaWidths() {
-  const skills = document.querySelector('.hero-skills');
+  const skillsWrap = document.querySelector('.hero-skills-wrap');
   const bio = document.querySelector('.hero-bio');
   const ctas = document.querySelector('.hero-ctas');
-  if (!skills || !bio || !ctas) return;
+  if (!skillsWrap || !bio || !ctas) return;
   if (getBreakpoint() === 'mobile') {
     bio.style.width = '';
     ctas.style.width = '';
+    skillsWrap.style.width = '';
     return;
   }
-  const w = skills.getBoundingClientRect().width;
+  skillsWrap.style.width = '';
+  bio.style.width = '';
+  ctas.style.width = '';
+  const w = Math.max(
+    skillsWrap.getBoundingClientRect().width,
+    ctas.getBoundingClientRect().width
+  );
   if (w > 0) {
+    skillsWrap.style.width = w + 'px';
     bio.style.width = w + 'px';
     ctas.style.width = w + 'px';
   }
