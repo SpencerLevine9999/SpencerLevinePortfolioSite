@@ -97,10 +97,10 @@ section.active{display:block;}
 .project-card:hover .project-thumb-wrap .project-thumb-video{opacity:1;}
 
 /* PROJECT DETAIL PAGE */
-.proj-detail-wrap{max-width:1100px;margin:0 auto;padding:0 40px 60px;}
+.proj-detail-wrap{max-width:1100px;margin:0 auto;padding:0 40px 24px;}
 .proj-back{display:inline-flex;align-items:center;gap:8px;font-size:21px;font-weight:600;color:var(--gold);cursor:pointer;padding:24px 0;text-decoration:none;transition:color 0.15s;}
 .proj-back:hover{color:var(--text);}
-.proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:48px;padding-bottom:40px;}
+.proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:20px;padding-bottom:16px;}
 .proj-header h1{font-family:'Poppins',sans-serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:28px;}
 .proj-meta-block{display:flex;flex-direction:column;gap:16px;}
 .proj-meta-item label{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
@@ -117,6 +117,12 @@ section.active{display:block;}
 .proj-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 .proj-video-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#666;font-size:12px;text-align:center;padding:16px;background:#1a1a1a;}
 .proj-video-ph .ph-var{color:#888;font-family:monospace;font-size:10px;background:#333;padding:2px 6px;border-radius:3px;}
+.proj-pdf{margin-bottom:0;}
+.proj-pdf-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;}
+.proj-pdf-frame{width:100%;max-width:960px;aspect-ratio:16/9;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#111;box-shadow:0 4px 16px rgba(0,0,0,0.1);}
+.proj-pdf-frame embed{width:100%;height:100%;display:block;}
+.proj-pdf-fallback{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--gold);text-decoration:none;transition:color 0.15s;}
+.proj-pdf-fallback:hover{color:var(--text);}
 
 /* RESUME */
 .resume-wrap{max-width:800px;margin:0 auto;padding:48px 40px 60px;}
@@ -298,6 +304,7 @@ section.active{display:block;}
       </div>
       <div id="pd-simple-desc" style="display:none;font-size:16px;color:#333;"></div>
     </div>
+    <div class="proj-pdf" id="pd-pdf" style="display:none;"></div>
     <div class="proj-gallery" id="pd-gallery"></div>
     <div class="proj-videos" id="pd-videos"></div>
   </div>
@@ -405,6 +412,10 @@ const IMAGES = {
   // Elaine Short Human Robotics Interaction Lab detail images
   ELAINE_1: 'Images/ELAINE1.png', ELAINE_2: 'Images/ELAINE2.png', ELAINE_3: 'Images/ELAINE3.png',
 
+  // UTX Internship Recap presentation
+  UTX_PDF: 'Images/UTX%20Internship%20Recap%20Slides.pdf',
+  UTX_THUMB: 'Images/GroupPic.png',
+
   // Robotic Gripper detail images
   GRIPPER_1: 'Images/ADAPTIVE%20ONE.jpeg', GRIPPER_2: 'Images/ADAP.jpeg', GRIPPER_3: 'Images/ADAPTER.jpeg',
   GRIPPER_4: 'Images/ADATPIVE2.jpeg', GRIPPER_5: 'Images/ADAPT.png', GRIPPER_6: 'Images/ADAPTER.png', GRIPPER_7: 'Images/ADAPTW.png',
@@ -482,6 +493,18 @@ const PROJECTS = [
     thumb: "GRIPPER_THUMB",
     images: ["GRIPPER_1","GRIPPER_2","GRIPPER_3","GRIPPER_4","GRIPPER_5","GRIPPER_6","GRIPPER_7"],
     videos: ["GRIPPER_VID1"]
+  },
+  {
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    category: "engineering",
+    title: "UTX Internship Recap Presentation",
+    type: "Internship",
+    date: "May 2026 – August 2026",
+    overview: "A summary of my internship for the summer of 2026.",
+    details: "Check out these slides to see pictures and videos of projects that I did during this internship, as well as looking at my other duties I had and to see what I learned as an intern.",
+    thumb: "UTX_THUMB",
+    pdf: "UTX_PDF",
+    pdfAspect: "16/9"
   },
   {
     thumbX: 50, thumbY: 40, thumbScale: 1,
@@ -758,6 +781,28 @@ function showProject(idx) {
   document.getElementById('pd-overview').innerHTML = p.overview;
   document.getElementById('pd-details').textContent = p.details;
 
+  // PDF viewer
+  const pdfBlock = document.getElementById('pd-pdf');
+  pdfBlock.innerHTML = '';
+  const pdfSrc = p.pdf && IMAGES[p.pdf];
+  if (pdfSrc) {
+    pdfBlock.style.display = '';
+    const frame = document.createElement('div');
+    frame.className = 'proj-pdf-frame';
+    frame.style.aspectRatio = p.pdfAspect || '16/9';
+    frame.innerHTML = `<embed src="${pdfSrc}" type="application/pdf" width="100%" height="100%">`;
+    const fallback = document.createElement('a');
+    fallback.className = 'proj-pdf-fallback';
+    fallback.href = pdfSrc;
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = '↗ Open / download PDF';
+    pdfBlock.appendChild(frame);
+    pdfBlock.appendChild(fallback);
+  } else {
+    pdfBlock.style.display = 'none';
+  }
+
   // Gallery
   const gallery = document.getElementById('pd-gallery');
   gallery.innerHTML = '';
@@ -836,6 +881,9 @@ function showProject(idx) {
       });
     }
   }
+
+  gallery.style.display = gallery.children.length ? '' : 'none';
+  videos.style.display = videos.children.length ? '' : 'none';
 
   document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
   document.getElementById('project-detail').classList.add('active');
