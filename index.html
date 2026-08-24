@@ -112,6 +112,11 @@ section.active{display:block;}
 .proj-gallery-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;margin:-1px;transition:transform 0.2s ease;will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
 .proj-gallery-wrap:hover .proj-gallery-img{filter:brightness(0.97);}
 .proj-gallery-ph{width:100%;aspect-ratio:4/3;background:#e0ddd8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:10px;color:#999;text-align:center;padding:12px;border-radius:4px;}
+.proj-section{margin-bottom:40px;}
+.proj-section-title{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;margin-bottom:16px;}
+.proj-section-blurb{font-size:15px;line-height:1.75;color:#333;margin-bottom:16px;}
+.proj-section .proj-gallery{margin-bottom:0;}
+.proj-video-native{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#111;}
 .proj-videos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:40px;}
 .proj-video-wrap{position:relative;padding-bottom:56.25%;background:#111;border-radius:4px;overflow:hidden;}
 .proj-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
@@ -420,6 +425,9 @@ const IMAGES = {
   GRIPPER_1: 'Images/ADAPTIVE%20ONE.jpeg', GRIPPER_2: 'Images/ADAP.jpeg', GRIPPER_3: 'Images/ADAPTER.jpeg',
   GRIPPER_4: 'Images/ADATPIVE2.jpeg', GRIPPER_5: 'Images/ADAPT.png', GRIPPER_6: 'Images/ADAPTER.png', GRIPPER_7: 'Images/ADAPTW.png',
   GRIPPER_VID1: 'https://www.youtube.com/shorts/D-NDVE-_Rj8',
+  GRIPPER_ACTION_VID: 'Images/GripperInAction.MOV',
+  GRIPPER_LINKAGE_VID: 'Images/Linkage%20Gripper%20In%20Action.mov',
+  GRIPPER_LINKAGE_CAD: 'Images/LinkageGripperCAD.png',
 
   // Swerve Drive detail images
   SWERVE_1: 'Images/SWERVE%20BOT%20ONE.jpeg', SWERVE_2: 'Images/SWERRVE%20%20BOT.jpeg', SWERVE_3: 'Images/SWERVE.jpeg',
@@ -499,6 +507,7 @@ const PROJECTS = [
       GRIPPER_5: {x:50,y:50,scale:1},
       GRIPPER_6: {x:50,y:20,scale:1},
       GRIPPER_7: {x:50,y:37,scale:1},
+      GRIPPER_LINKAGE_CAD: {x:50,y:50,scale:1,fit:'contain'},
     },
     category: "engineering",
     title: "Robotic gripper for 6-axis robot (in progress)",
@@ -507,8 +516,22 @@ const PROJECTS = [
     overview: "Creating a 3D-printed gripper as a 25 times cheaper alternative to the Robotiq adaptive gripper. Gripper will be used in the Nemitz robot group at Tufts to autonomously build mine-disabling 3D-printed crab-like robots.",
     details: "Currently creating a 3D-printed gripper for the UR7e 6-axis robotic arm that can grab a wide variety of objects. Also planning on utilizing force sensors to allow the gripper to control its grip strength and detect objects. I started working on this project in Dr. Short's human-robot interaction lab at Tufts, but later shifted to Dr. Nemitz's robotics group at Tufts because their goals aligned better with mine. The main goal of this project is to create both a reliable, cheaper alternative to expensive adaptive grippers and one that can be controlled from a computer connected to the UR7e gripper.",
     thumb: "GRIPPER_THUMB",
-    images: ["GRIPPER_1","GRIPPER_2","GRIPPER_3","GRIPPER_4","GRIPPER_5","GRIPPER_6","GRIPPER_7"],
-    videos: ["GRIPPER_VID1"]
+    sections: [
+      {
+        name: null,
+        items: [
+          {img:"GRIPPER_1"}, {img:"GRIPPER_2"}, {img:"GRIPPER_3"}, {video:"GRIPPER_ACTION_VID"},
+          {img:"GRIPPER_4"}, {img:"GRIPPER_5"}, {img:"GRIPPER_6"}, {img:"GRIPPER_7"},
+        ]
+      },
+      {
+        name: "Research and Development",
+        blurb: "After talking to a senior engineer at Boston Dynamics, I have decided to try a linkage-based mechanism approach to the gripper, as opposed to a gear based one, both to learn more about different linkages and to try a more reliable approach to this project.",
+        items: [
+          {video:"GRIPPER_LINKAGE_VID"}, {img:"GRIPPER_LINKAGE_CAD"},
+        ]
+      }
+    ]
   },
   {
     id: 12, displayOrder: 0.5,
@@ -835,6 +858,103 @@ function showProject(id) {
   gallery.innerHTML = '';
   const galleryImgSrcs = [];
   const aspect = p.galleryAspect || '5/4';
+  const videos = document.getElementById('pd-videos');
+  videos.innerHTML = '';
+
+  if (p.sections && p.sections.length) {
+    p.sections.forEach(section => {
+      const secEl = document.createElement('div');
+      secEl.className = 'proj-section';
+      secEl.style.gridColumn = '1/-1';
+      if (section.name) {
+        const h = document.createElement('h3');
+        h.className = 'proj-section-title';
+        h.textContent = section.name;
+        secEl.appendChild(h);
+      }
+      if (section.blurb) {
+        const b = document.createElement('p');
+        b.className = 'proj-section-blurb';
+        b.textContent = section.blurb;
+        secEl.appendChild(b);
+      }
+      const grid = document.createElement('div');
+      grid.className = 'proj-gallery';
+      const sectionImgSrcs = (section.items || []).filter(it => it.img).map(it => IMAGES[it.img]).filter(Boolean);
+      (section.items || []).forEach(item => {
+        if (item.img) {
+          const key = item.img;
+          const src = IMAGES[key];
+          if (!src) return;
+          galleryImgSrcs.push(src);
+          const adj   = (p.imageAdjust && p.imageAdjust[key]) || {};
+          const x     = adj.x     !== undefined ? adj.x     : (p.imgX     || 0);
+          const y     = adj.y     !== undefined ? adj.y     : (p.imgY     || 0);
+          const scale = adj.scale !== undefined ? adj.scale : (p.imgScale || 1);
+          const fit   = adj.fit   || 'cover';
+          const wrap = document.createElement('div');
+          wrap.className = 'proj-gallery-wrap';
+          wrap.style.aspectRatio = aspect;
+          const img = document.createElement('img');
+          img.className = 'proj-gallery-img';
+          img.src = src;
+          img.alt = key;
+          const applyImgStyle = (s) => {
+            img.style.objectFit      = fit;
+            img.style.objectPosition = `${x}% ${y}%`;
+            img.style.width          = `${s * 100}%`;
+            img.style.height         = `${s * 100}%`;
+            img.style.transform      = 'translate(-50%, -50%)';
+          };
+          img.style.position  = 'absolute';
+          img.style.top       = '50%';
+          img.style.left      = '50%';
+          img.style.transition = 'width 0.2s ease, height 0.2s ease';
+          applyImgStyle(scale);
+          if (window.matchMedia('(hover: hover)').matches) {
+            wrap.addEventListener('mouseenter', () => applyImgStyle(Math.max(scale, 1) * 1.04));
+            wrap.addEventListener('mouseleave', () => applyImgStyle(scale));
+          }
+          wrap.addEventListener('click', () => openLightbox(sectionImgSrcs, sectionImgSrcs.indexOf(src)));
+          wrap.appendChild(img);
+          grid.appendChild(wrap);
+        } else if (item.video) {
+          const src = IMAGES[item.video];
+          if (!src) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'proj-gallery-wrap';
+          wrap.style.aspectRatio = aspect;
+          wrap.style.cursor = 'default';
+          if (isVideo(src)) {
+            const vid = document.createElement('video');
+            vid.className = 'proj-video-native';
+            vid.src = src;
+            vid.controls = true;
+            vid.style.objectFit = 'contain';
+            wrap.appendChild(vid);
+          } else {
+            const embedUrl = src
+              .replace(/youtube\.com\/shorts\/([^?&]+).*/, 'youtube.com/embed/$1')
+              .replace(/youtube\.com\/watch\?v=([^&]+).*/, 'youtube.com/embed/$1');
+            wrap.innerHTML = `<iframe style="position:absolute;inset:0;width:100%;height:100%;border:none;" src="${embedUrl}" allowfullscreen></iframe>`;
+          }
+          grid.appendChild(wrap);
+        }
+      });
+      secEl.appendChild(grid);
+      gallery.appendChild(secEl);
+    });
+    gallery.style.display = gallery.children.length ? '' : 'none';
+    videos.style.display = 'none';
+    document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
+    document.getElementById('project-detail').classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('nav-portfolio').classList.add('active');
+    window.scrollTo(0,0);
+    history.pushState(null, '', '#project-' + p.id);
+    return;
+  }
+
   if (p.images) {
     p.images.forEach(key => {
       const src = IMAGES[key];
@@ -880,9 +1000,6 @@ function showProject(id) {
   }
 
   // Videos
-  const videos = document.getElementById('pd-videos');
-  videos.innerHTML = '';
-
   if (p.localVideo && IMAGES[p.localVideo]) {
     const vid = document.createElement('video');
     vid.src = IMAGES[p.localVideo];
