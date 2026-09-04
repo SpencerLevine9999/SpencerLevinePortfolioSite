@@ -98,8 +98,11 @@ section.active{display:block;}
 
 /* PROJECT DETAIL PAGE */
 .proj-detail-wrap{max-width:1100px;margin:0 auto;padding:0 40px 24px;}
-.proj-back{display:inline-flex;align-items:center;gap:8px;font-size:21px;font-weight:600;color:var(--gold);cursor:pointer;padding:24px 0;text-decoration:none;transition:color 0.15s;}
+.proj-back-block{padding:24px 0 0;}
+.proj-back{display:inline-flex;align-items:center;gap:8px;font-size:21px;font-weight:600;color:var(--gold);cursor:pointer;text-decoration:none;transition:color 0.15s;}
 .proj-back:hover{color:var(--text);}
+.proj-back-secondary{display:block;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;text-decoration:none;padding:2px 0 0;transition:color 0.15s;}
+.proj-back-secondary:hover{color:var(--text);}
 .proj-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:20px;padding-bottom:16px;}
 .proj-header h1{font-family:'Poppins',sans-serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:28px;}
 .proj-meta-block{display:flex;flex-direction:column;gap:16px;}
@@ -292,7 +295,10 @@ section.active{display:block;}
 <!-- PROJECT DETAIL -->
 <section id="project-detail">
   <div class="proj-detail-wrap">
-    <a class="proj-back" onclick="showPage('portfolio')">← Back to Portfolio</a>
+    <div class="proj-back-block">
+      <a class="proj-back" id="pd-back-primary"></a>
+      <a class="proj-back-secondary" id="pd-back-secondary" onclick="showPage('portfolio')" style="display:none;">← Back to Portfolio</a>
+    </div>
     <div class="proj-header">
       <div>
         <h1 id="pd-title"></h1>
@@ -419,7 +425,38 @@ const IMAGES = {
 
   // UTX Internship Recap presentation
   UTX_PDF: 'Images/UTX%20Internship%20Recap%20Slides%20updated.pdf',
-  UTX_THUMB: 'Images/GroupPic.png',
+  UTX_THUMB: 'Images/CustomTransducer1.jpg',
+
+  // UTX sub-project detail images
+  UTX_TRANS_1: 'Images/CustomTransducer1.jpg', UTX_TRANS_2: 'Images/CustomTransducer2.jpg', UTX_TRANS_3: 'Images/CustomTransducer3.jpg',
+  UTX_TRANS_4: 'Images/Me%20at%20Lathe.jpeg', UTX_TRANS_5: 'Images/Microscope%20Me.jpeg', UTX_TRANS_6: 'Images/Lapping%20Desk%20Me.jpeg',
+
+  SPRING_THUMB: 'Images/Spring%20Press%20Iso%20view.jpeg',
+  SPRING_1: 'Images/Spring%20Press%20all%204.jpeg', SPRING_2: 'Images/Spring%20Press%202.png',
+  SPRING_3: 'Images/Spring%20Press%20Cad%201.png', SPRING_4: 'Images/Spring%20Press%20Cad%203.png',
+  SPRING_5: 'Images/TechnicalDrawingsForSpringPress.png',
+
+  CRYSTAL_THUMB: 'Images/Mouse%20Trap%20Clamp%20Flat%20Crystal%20Iso.jpeg',
+  CRYSTAL_1: 'Images/Flat%20Crystal%20Mouse%20Trap%20Side.jpeg', CRYSTAL_2: 'Images/Flat%20Crystal%20Mouse%20Trap%20Cad%201.png',
+  CRYSTAL_3: 'Images/Flat%20Crystal%20Mouse%20Trap%20Cad%202.png', CRYSTAL_4: 'Images/Mouse%20Trap%20Clamp%20Iso%20Clarence.jpeg',
+  CRYSTAL_5: 'Images/Clarence%20Crystal%20Front%20View%20Mouse%20Trap.jpeg', CRYSTAL_6: 'Images/Clarence%20Crystal%20Mouse%20Trap%20Cad%201.png',
+  CRYSTAL_7: 'Images/Clarence%20Crystal%20Mouse%20Trap%20Cad%202.png',
+
+  MANIP_THUMB: 'Images/Precision%20Manipulator%20Front%20view.jpeg',
+  MANIP_1: 'Images/Precision%20Manipulator%20Cad.png',
+
+  FUSIONPLUGIN_THUMB: 'Images/Knurl%20Maker%20Plugin.mp4',
+  FUSIONPLUGIN_1: 'Images/Housing%20Fusion%20Plugin.mp4',
+
+  DREMEL_THUMB: 'Images/Dremel%20Fixture%20Iso.jpeg',
+  DREMEL_1: 'Images/Dremel%20Fixture%20Side%20view.jpeg', DREMEL_2: 'Images/Dremel%20Fix%20Cad%201.png', DREMEL_3: 'Images/Dremel%20Fix%20Cad%202.png',
+
+  TEACHFUSION_THUMB: 'Images/Me%20teching%20kevin.jpeg',
+
+  LENS_THUMB: 'Images/Lenses.jpeg',
+
+  POOLPOTTERY_THUMB: 'Images/Pottery%20Stuff.jpeg',
+  POOLPOTTERY_1: 'Images/Pool%20Stuff.jpeg',
 
   // Robotic Gripper detail images
   GRIPPER_1: 'Images/ADAPTIVE%20ONE.jpeg', GRIPPER_2: 'Images/ADAP.jpeg', GRIPPER_3: 'Images/ADAPTER.jpeg',
@@ -428,6 +465,9 @@ const IMAGES = {
   GRIPPER_ACTION_VID: 'Images/GripperInAction.MOV',
   GRIPPER_LINKAGE_VID: 'Images/Linkage%20Gripper%20In%20Action.mov',
   GRIPPER_LINKAGE_CAD: 'Images/LinkageGripperCAD.png',
+  GRIPPER_FINAL_1: 'Images/FinalGripper1.mov', GRIPPER_FINAL_2: 'Images/FinalGripper2.mov', GRIPPER_FINAL_3: 'Images/FinalGripper3.MOV',
+  GRIPPER_FINAL_4: 'Images/FinalGripper4.jpeg', GRIPPER_FINAL_5: 'Images/FinalGripper5.jpeg',
+  GRIPPER_FINAL_6: 'Images/FinalGripper6.png', GRIPPER_FINAL_7: 'Images/FinalGripper7.png', GRIPPER_FINAL_8: 'Images/FinalGripper8.png',
 
   // Swerve Drive detail images
   SWERVE_1: 'Images/SWERVE%20BOT%20ONE.jpeg', SWERVE_2: 'Images/SWERRVE%20%20BOT.jpeg', SWERVE_3: 'Images/SWERVE.jpeg',
@@ -498,7 +538,7 @@ const IMAGES = {
 const PROJECTS = [
   {
     id: 0, displayOrder: 0,
-    thumbX: 50, thumbY: 25, thumbScale: 1,
+    thumbX: 33, thumbY: 44, thumbScale: 1.39,
     galleryAspect: '4/3', imgX: 0, imgY: 0, imgScale: 1, imageAdjust: {
       GRIPPER_1: {x:50,y:25,scale:1},
       GRIPPER_2: {x:50,y:50,scale:1},
@@ -508,17 +548,30 @@ const PROJECTS = [
       GRIPPER_6: {x:50,y:20,scale:1},
       GRIPPER_7: {x:50,y:37,scale:1},
       GRIPPER_LINKAGE_CAD: {x:50,y:50,scale:1,fit:'contain'},
+      GRIPPER_FINAL_4: {x:39, y:0, scale:1.36},
+      GRIPPER_FINAL_6: {x:100, y:0, scale:1},
+      GRIPPER_FINAL_7: {x:79, y:0, scale:1},
+      GRIPPER_FINAL_8: {x:5, y:0, scale:1},
+      GRIPPER_FINAL_5: {x:0, y:18, scale:1},
     },
     category: "engineering",
-    title: "Robotic gripper for 6-axis robot (in progress)",
+    title: "Robotic gripper for 6-axis robot",
     type: "Gripper Design",
-    date: "January 2026 - Present",
-    overview: "Creating a 3D-printed gripper as a 25 times cheaper alternative to the Robotiq adaptive gripper. Gripper will be used in the Nemitz robot group at Tufts to autonomously build mine-disabling 3D-printed crab-like robots.",
-    details: "Currently creating a 3D-printed gripper for the UR7e 6-axis robotic arm that can grab a wide variety of objects. Also planning on utilizing force sensors to allow the gripper to control its grip strength and detect objects. I started working on this project in Dr. Short's human-robot interaction lab at Tufts, but later shifted to Dr. Nemitz's robotics group at Tufts because their goals aligned better with mine. The main goal of this project is to create both a reliable, cheaper alternative to expensive adaptive grippers and one that can be controlled from a computer connected to the UR7e gripper.",
-    thumb: "GRIPPER_THUMB",
+    date: "January 2026 - September 2026",
+    overview: "Created a 3D-printed gripper as a 25 times cheaper alternative to the Robotiq adaptive gripper. Gripper is adaptable and is able to pick up both square and circular objects.",
+    details: "Designed and fabricated a 3D-printed gripper for the UR7e 6-axis robotic arm that can grab a wide variety of objects. I started working on this project in Dr. Short's human-robot interaction lab at Tufts, but later shifted to Dr. Nemitz's robotics group at Tufts because this lab's goals aligned better with mine. The main goal of this project is to create both a reliable, cheaper alternative to expensive adaptive grippers and one that can be controlled from a computer connected to the UR7e gripper.",
+    thumb: "GRIPPER_FINAL_4",
     sections: [
       {
         name: null,
+        items: [
+          {img:"GRIPPER_FINAL_4"}, {img:"GRIPPER_FINAL_5"},
+          {video:"GRIPPER_FINAL_1"}, {video:"GRIPPER_FINAL_2"}, {video:"GRIPPER_FINAL_3"},
+          {img:"GRIPPER_FINAL_6"}, {img:"GRIPPER_FINAL_7"}, {img:"GRIPPER_FINAL_8"},
+        ]
+      },
+      {
+        name: "First working version",
         items: [
           {img:"GRIPPER_1"}, {img:"GRIPPER_2"}, {img:"GRIPPER_3"}, {video:"GRIPPER_ACTION_VID"},
           {img:"GRIPPER_4"}, {img:"GRIPPER_5"}, {img:"GRIPPER_6"}, {img:"GRIPPER_7"},
@@ -541,10 +594,158 @@ const PROJECTS = [
     type: "Internship",
     date: "May 2026 – August 2026",
     overview: "A summary of my internship for the summer of 2026.",
-    details: "Check out these slides to see pictures and videos of projects that I did during this internship, as well as looking at my other duties I had and to see what I learned as an intern.",
+    details: "Check out these projects to see pictures and videos of what I did during this internship. Also, check out the slideshow at the bottom of the page with even more details.",
     thumb: "UTX_THUMB",
     pdf: "UTX_PDF",
-    pdfAspect: "16/9"
+    pdfAspect: "16/9",
+    subProjects: [13, 14, 15, 16, 17, 18, 21, 19, 20]
+  },
+  {
+    id: 13, displayOrder: 0,
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    category: "utx-sub",
+    title: "Transducer Manufacturing",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Converted old Autodesk and hand-drawn machine drawings into 3D CAD models to be sent out and machined; also manufactured transducers from start to finish.",
+    details: "At UTX, I learned to manufacture transducers to be used to inspect the integrity of materials in applications like airplanes, helicopters, bridges, and pipes. I used lathes, soldered under a microscope, applied quarter-wave epoxy-matching layers, and verified transducer performance with a pulser-receiver and oscilloscope; I also captured RF waveforms and used Fast Fourier Transform (FFT) analysis as a part of that process. I also converted outdated 2D drawings into 3D models and updated them to ASME third-angle projection standards, to then be machined for transducers.",
+    thumb: "UTX_THUMB",
+    images: ["UTX_THUMB", "UTX_TRANS_2", "UTX_TRANS_3", "UTX_TRANS_4", "UTX_TRANS_5", "UTX_TRANS_6"]
+  },
+  {
+    id: 14, displayOrder: 0,
+    thumbX: 51, thumbY: 71, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    imageAdjust: {
+      SPRING_2: {x:37, y:35, scale:1},
+      SPRING_3: {x:49, y:39, scale:1},
+      SPRING_4: {x:48, y:31, scale:1},
+    },
+    category: "utx-sub",
+    title: "Spring Press",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Reverse-engineered a spring press and fabricated it from scratch.",
+    details: "My boss handed me a spring press fixture that he said was “likely over 30 years old,” and told me he wanted me to design four more. I was able to deconstruct the mechanism and CAD out an improved design, making it better able to hold the spring in the middle. Then, I created a bill of materials and learned how to use a lathe and manual mill, two machines I had never used before my internship, to manufacture the fixture.",
+    thumb: "SPRING_THUMB",
+    images: ["SPRING_THUMB", "SPRING_1", "SPRING_2", "SPRING_3", "SPRING_4", "SPRING_5"]
+  },
+  {
+    id: 15, displayOrder: 0,
+    thumbX: 54, thumbY: 71, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    imageAdjust: {
+      CRYSTAL_THUMB: {x:52, y:78, scale:1},
+      CRYSTAL_2: {x:45, y:40, scale:1},
+      CRYSTAL_3: {x:44, y:21, scale:1},
+      CRYSTAL_4: {x:50, y:50, scale:2.5},
+      CRYSTAL_5: {x:45, y:100, scale:1.32},
+      CRYSTAL_6: {x:51, y:43, scale:1},
+      CRYSTAL_7: {x:52, y:12, scale:1},
+      CRYSTAL_1: {x:50, y:50, scale:2.5},
+    },
+    category: "utx-sub",
+    title: "Crystal Clamping Mechanism",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Designed fixture used to attach crystals to wedges.",
+    details: "Replaced a carefully bent bobby pin setup with a mousetrap-inspired clamping mechanism. My design allows the mechanism to apply force more evenly across the crystal.",
+    thumb: "CRYSTAL_THUMB",
+    images: ["CRYSTAL_THUMB", "CRYSTAL_2", "CRYSTAL_3", "CRYSTAL_4", "CRYSTAL_5", "CRYSTAL_6", "CRYSTAL_7", "CRYSTAL_1"]
+  },
+  {
+    id: 16, displayOrder: 0,
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    category: "utx-sub",
+    title: "Precision Manipulator",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Designed a mechanism to precisely orient an ultrasonic transducer relative to a test target.",
+    details: "The existing setup at UTX could rotate about two axes; I added precision control about a third axis. I was able to do this by using an optical rotation stage connected to the rest of the manipulator.",
+    thumb: "MANIP_THUMB",
+    images: ["MANIP_THUMB", "MANIP_1"]
+  },
+  {
+    id: 17, displayOrder: 0,
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    category: "utx-sub",
+    title: "Fusion Plug-ins",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Created two plugins for Autodesk Fusion that streamline the modeling of transducer housings and make knurls around cylindrical objects.",
+    details: "The first plugin I made was one that models the types of housings needed by UTX for their transducers. I had the idea for it from recreating old 2D drawings; I realized many of the housings were very similar, and I was often copying and pasting my designs to make the process easier for myself. The plugin allows the user to specify pretty much every property of a transducer housing UTX could need, and it is able to design both rectangular and cylindrical housings. The next plugin I made was a knurl generator, one that allows the user to etch a knurl into any modeled cylinder. To code the plugins, I used Claude Code.",
+    thumb: "FUSIONPLUGIN_THUMB",
+    sections: [
+      {
+        name: null,
+        items: [{video:"FUSIONPLUGIN_THUMB"}, {video:"FUSIONPLUGIN_1"}]
+      }
+    ]
+  },
+  {
+    id: 18, displayOrder: 0,
+    thumbX: 50, thumbY: 50, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    category: "utx-sub",
+    title: "Dremel Cutting Fixture",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Designed a sliding fixture for a Dremel to make straight, repeatable cuts.",
+    details: "I was able to design a fixture for a Dremel 100 to be used to cut transducer crystals. The crystals are able to be cut by sliding the Dremel across them, which can be difficult when freehanding the Dremel. Further, free-handing makes the crystals cut less consistently. My fixture allows the Dremel to slide across a table, making the process more consistent and easier.",
+    thumb: "DREMEL_THUMB",
+    images: ["DREMEL_THUMB", "DREMEL_1", "DREMEL_2", "DREMEL_3"]
+  },
+  {
+    id: 21, displayOrder: 0,
+    thumbX: 49, thumbY: 14, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    imageAdjust: {
+      TEACHFUSION_THUMB: {x:51, y:12, scale:1},
+    },
+    category: "utx-sub",
+    title: "Teaching Fusion",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    overview: "Taught two employees to use Autodesk Fusion.",
+    details: "One employee had no prior experience; the other had only used Fusion a few times. I focused on teaching them the basics of the program, including how to use sketches, how to use parameters in a sketch (distances, equal, parallel, etc.), extrudes, and revolves. I also taught them how to convert their designs into ASME third-angle projection drawings.",
+    thumb: "TEACHFUSION_THUMB",
+    images: ["TEACHFUSION_THUMB"]
+  },
+  {
+    id: 19, displayOrder: 0,
+    thumbX: 49, thumbY: 61, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    imageAdjust: {
+      LENS_THUMB: {x:49, y:69, scale:1},
+    },
+    category: "utx-sub",
+    title: "Custom Lens Tooling",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    simple: true,
+    overview: "As a proof of concept, I was able to 3D-print cylindrical and spherical lensing tools, using a .2mm nozzle.",
+    thumb: "LENS_THUMB",
+    images: ["LENS_THUMB"]
+  },
+  {
+    id: 20, displayOrder: 0,
+    thumbX: 51, thumbY: 53, thumbScale: 1,
+    imgX: 50, imgY: 50, imgScale: 1,
+    imageAdjust: {
+      POOLPOTTERY_THUMB: {x:50, y:54, scale:1},
+      POOLPOTTERY_1: {x:49, y:72, scale:1},
+    },
+    category: "utx-sub",
+    title: "Pool and Pottery Projects",
+    type: "UTX Internship Project",
+    date: "May 2026 – August 2026",
+    simple: true,
+    overview: "Throughout my internship, UTX recruited me to design some pottery tools and hooks for a shelf and cupholders for an above-ground pool. I was able to apply the same CAD and problem-solving process to make these projects.",
+    thumb: "POOLPOTTERY_THUMB",
+    images: ["POOLPOTTERY_THUMB", "POOLPOTTERY_1"]
   },
   {
     id: 1, displayOrder: 1,
@@ -744,7 +945,7 @@ const PROJECTS = [
     title: "Elaine Short Human Robotics Interaction Lab",
     type: "Research Assistant",
     date: "January 2026 - April 2026",
-    overview: "Began the design process of my <span class=\"skill-tag-link\" style=\"border:none;background:none;padding:0;\" onclick=\"showProject(PROJECTS.find(p=>p.title==='Robotic gripper for 6-axis robot (in progress)').id)\">adaptive gripper project</span>. Also supported PhD research by designing components for robotic environments and model robotic arms.",
+    overview: "Began the design process of my <span class=\"skill-tag-link\" style=\"border:none;background:none;padding:0;\" onclick=\"showProject(PROJECTS.find(p=>p.title==='Robotic gripper for 6-axis robot').id)\">adaptive gripper project</span>. Also supported PhD research by designing components for robotic environments and model robotic arms.",
     details: "In this lab, I worked with different PhD students to assist with their research. One task I did was model an environment for one student to train a robot arm to do push T: a task that uses machine learning to push a T-shaped object at one point of contact into a target position and orientation. I modeled the environment in Fusion and designed an end-effector for the arm to complete its task, as well as the T to be pushed. Next, for another project, a robotic arm had to pick up cans and place them on a shelf autonomously. To assist with this project, I designed a shelf that could be easily assembled with easily replaceable components in case the robot went awry and broke part of the shelf. Lastly, I designed a mock robotic arm and gripper to be used at an educational showcase.",
     thumb: "ELAINE_THUMB",
     images: ["ELAINE_1","ELAINE_2","ELAINE_3"],
@@ -764,6 +965,41 @@ function showPage(id) {
 
 function isVideo(src) { return src && /\.(mp4|webm|mov)$/i.test(src); }
 
+function buildProjectCard(p) {
+  const src = IMAGES[p.thumb];
+  const card = document.createElement('div');
+  card.className = 'project-card';
+  card.onclick = () => showProject(p.id);
+  let thumbHTML;
+  if (!src) {
+    thumbHTML = `<div class="project-thumb-ph"><span>${p.title}</span><span class="ph-var">[${p.thumb}]</span></div>`;
+  } else if (isVideo(src)) {
+    thumbHTML = `<div class="project-thumb-wrap"><video class="project-thumb-video" src="${src}" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;"></video></div>`;
+  } else {
+    const tx    = p.thumbX     !== undefined ? p.thumbX     : 50;
+    const ty    = p.thumbY     !== undefined ? p.thumbY     : 50;
+    const scale = p.thumbScale || 1;
+    thumbHTML = `<div class="project-thumb-container"><img src="${src}" alt="${p.title}" style="position:absolute;top:50%;left:50%;width:${scale*100}%;height:${scale*100}%;object-fit:cover;object-position:${tx}% ${ty}%;transform:translate(-50%,-50%);display:block;"></div>`;
+  }
+  card.innerHTML = `${thumbHTML}<div class="project-label"><h3>${p.title}</h3></div>`;
+  return card;
+}
+
+function bindCardHoverVideo(grid) {
+  grid.addEventListener('mouseover', e => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+    const vid = card.querySelector('.project-thumb-video');
+    if (vid) vid.play();
+  });
+  grid.addEventListener('mouseout', e => {
+    const card = e.target.closest('.project-card');
+    if (!card) return;
+    const vid = card.querySelector('.project-thumb-video');
+    if (vid) { vid.pause(); vid.currentTime = 0; }
+  });
+}
+
 function renderPortfolioGrid() {
   const grid = document.getElementById('portfolio-grid');
   grid.innerHTML = '';
@@ -780,50 +1016,37 @@ function renderPortfolioGrid() {
     heading.className = 'portfolio-section-heading';
     heading.textContent = cat.label;
     grid.appendChild(heading);
-    catProjects.forEach(({ p, idx }) => {
-      const src = IMAGES[p.thumb];
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      card.onclick = () => showProject(p.id);
-      let thumbHTML;
-      if (!src) {
-        thumbHTML = `<div class="project-thumb-ph"><span>${p.title}</span><span class="ph-var">[${p.thumb}]</span></div>`;
-      } else if (isVideo(src)) {
-        thumbHTML = `<div class="project-thumb-wrap"><video class="project-thumb-video" src="${src}" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;"></video></div>`;
-      } else {
-        const tx    = p.thumbX     !== undefined ? p.thumbX     : 50;
-        const ty    = p.thumbY     !== undefined ? p.thumbY     : 50;
-        const scale = p.thumbScale || 1;
-        thumbHTML = `<div class="project-thumb-container"><img src="${src}" alt="${p.title}" style="position:absolute;top:50%;left:50%;width:${scale*100}%;height:${scale*100}%;object-fit:cover;object-position:${tx}% ${ty}%;transform:translate(-50%,-50%);display:block;"></div>`;
-      }
-      card.innerHTML = `${thumbHTML}<div class="project-label"><h3>${p.title}</h3></div>`;
-      grid.appendChild(card);
+    catProjects.forEach(({ p }) => {
+      grid.appendChild(buildProjectCard(p));
     });
   });
 
   // Hover-to-play for video thumbs
-  grid.addEventListener('mouseover', e => {
-    const card = e.target.closest('.project-card');
-    if (!card) return;
-    const vid = card.querySelector('.project-thumb-video');
-    if (vid) vid.play();
-  });
-  grid.addEventListener('mouseout', e => {
-    const card = e.target.closest('.project-card');
-    if (!card) return;
-    const vid = card.querySelector('.project-thumb-video');
-    if (vid) { vid.pause(); vid.currentTime = 0; }
-  });
+  bindCardHoverVideo(grid);
 }
 
 function showProject(id) {
   const p = PROJECTS.find(pr => pr.id === id);
+
+  // Back link(s)
+  const backPrimary = document.getElementById('pd-back-primary');
+  const backSecondary = document.getElementById('pd-back-secondary');
+  if (p.category === 'utx-sub') {
+    backPrimary.textContent = '← Back to UTX Projects';
+    backPrimary.onclick = () => showProject(12);
+    backSecondary.style.display = '';
+  } else {
+    backPrimary.textContent = '← Back to Portfolio';
+    backPrimary.onclick = () => showPage('portfolio');
+    backSecondary.style.display = 'none';
+  }
+
   document.getElementById('pd-title').textContent = p.title;
   document.getElementById('pd-type').textContent = p.type;
   document.getElementById('pd-type-row').style.display = p.type ? '' : 'none';
   document.getElementById('pd-date').textContent = p.date;
   document.getElementById('pd-date-row').style.display = p.date ? '' : 'none';
-  const useSimple = p.category === 'other';
+  const useSimple = p.category === 'other' || p.simple === true;
   document.getElementById('pd-overview-block').style.display = useSimple ? 'none' : '';
   const simpleDesc = document.getElementById('pd-simple-desc');
   simpleDesc.style.display = useSimple ? '' : 'none';
@@ -834,6 +1057,7 @@ function showProject(id) {
   // PDF viewer
   const pdfBlock = document.getElementById('pd-pdf');
   pdfBlock.innerHTML = '';
+  pdfBlock.removeAttribute('style');
   const pdfSrc = p.pdf && IMAGES[p.pdf];
   if (pdfSrc) {
     pdfBlock.style.display = '';
@@ -860,6 +1084,39 @@ function showProject(id) {
   const aspect = p.galleryAspect || '5/4';
   const videos = document.getElementById('pd-videos');
   videos.innerHTML = '';
+  gallery.parentNode.insertBefore(pdfBlock, gallery); // restore default pdf-before-gallery order
+
+  if (p.subProjects && p.subProjects.length) {
+    const hubGrid = document.createElement('div');
+    hubGrid.className = 'portfolio-grid';
+    hubGrid.style.cssText = 'grid-column:1/-1;margin:0 0 40px;padding:0;max-width:none;';
+    p.subProjects.forEach(subId => {
+      const sp = PROJECTS.find(pr => pr.id === subId);
+      if (sp) hubGrid.appendChild(buildProjectCard(sp));
+    });
+    bindCardHoverVideo(hubGrid);
+    gallery.appendChild(hubGrid);
+    gallery.style.display = '';
+    videos.style.display = 'none';
+
+    if (pdfSrc) {
+      const caption = document.createElement('p');
+      caption.className = 'proj-pdf-label';
+      caption.style.textAlign = 'center';
+      caption.textContent = 'Slide Show With My Projects';
+      pdfBlock.insertBefore(caption, pdfBlock.firstChild);
+      pdfBlock.style.cssText = 'display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:12px;';
+      gallery.parentNode.insertBefore(pdfBlock, videos);
+    }
+
+    document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
+    document.getElementById('project-detail').classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('nav-portfolio').classList.add('active');
+    window.scrollTo(0,0);
+    history.pushState(null, '', '#project-' + p.id);
+    return;
+  }
 
   if (p.sections && p.sections.length) {
     p.sections.forEach(section => {
