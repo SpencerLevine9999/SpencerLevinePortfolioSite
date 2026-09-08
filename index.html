@@ -423,8 +423,6 @@ const IMAGES = {
   // Elaine Short Human Robotics Interaction Lab detail images
   ELAINE_1: 'Images/ELAINE1.png', ELAINE_2: 'Images/ELAINE2.png', ELAINE_3: 'Images/ELAINE3.png',
 
-  // UTX Internship Recap presentation
-  UTX_PDF: 'Images/UTX%20Internship%20Recap%20Slides%20updated.pdf',
   UTX_THUMB: 'Images/CustomTransducer1.jpg',
 
   // UTX sub-project detail images
@@ -594,10 +592,8 @@ const PROJECTS = [
     type: "Internship",
     date: "May 2026 – August 2026",
     overview: "A summary of my internship for the summer of 2026.",
-    details: "Check out these projects to see pictures and videos of what I did during this internship. Also, check out the slideshow at the bottom of the page with even more details.",
+    details: "Check out these projects to see pictures and videos of what I did during this internship.",
     thumb: "UTX_THUMB",
-    pdf: "UTX_PDF",
-    pdfAspect: "16/9",
     subProjects: [13, 14, 15, 16, 17, 18, 21, 19, 20]
   },
   {
@@ -1098,16 +1094,6 @@ function showProject(id) {
     gallery.appendChild(hubGrid);
     gallery.style.display = '';
     videos.style.display = 'none';
-
-    if (pdfSrc) {
-      const caption = document.createElement('p');
-      caption.className = 'proj-pdf-label';
-      caption.style.textAlign = 'center';
-      caption.textContent = 'Slide Show With My Projects';
-      pdfBlock.insertBefore(caption, pdfBlock.firstChild);
-      pdfBlock.style.cssText = 'display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:12px;';
-      gallery.parentNode.insertBefore(pdfBlock, videos);
-    }
 
     document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
     document.getElementById('project-detail').classList.add('active');
